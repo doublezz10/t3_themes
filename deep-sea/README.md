@@ -4,6 +4,18 @@ A dark navy theme with dot-matrix sea animals swimming behind the chat. One anim
 
 ![Home screen](preview/home.gif)
 
+## Screenshots
+
+| New thread | Inside a conversation |
+| --- | --- |
+| ![New thread screen](preview/home.png) | ![Conversation screen](preview/conversation.png) |
+
+## More of the parade
+
+| Jellyfish | Humpback whale | Anglerfish |
+| --- | --- | --- |
+| ![Jellyfish](preview/jellyfish.gif) | ![Whale](preview/whale.gif) | ![Anglerfish](preview/anglerfish.gif) |
+
 ## Animals
 
 ![All animals](preview/gallery.png)
@@ -27,6 +39,10 @@ T3 themes can't run JavaScript or load files, so the whole background is one ani
 - Every animal shares one timeline the length of the full loop. `keyTimes`/`keyPoints` keep each animal parked off-screen except during its own window, which is how they take turns.
 - The dot-matrix look comes from two SVG `<pattern>` fills (a 3×3 tile of dots in four shades of blue), so each silhouette is just a path filled with dots. Tails and tentacles are dotted strokes (`stroke-dasharray="0 5"` with round caps).
 - Dimming in conversations uses `:has([data-timeline-row-kind])` to switch a translucent layer on top of the background.
+
+## About the previews
+
+The screenshots and GIFs are rendered in Chrome from `background.svg`, placed inside a T3-style window mockup. They aren't captures of the T3 Code app itself. The GIFs play in real time.
 
 ## Editing
 
