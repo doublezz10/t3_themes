@@ -1,14 +1,21 @@
 # Deep Sea
 
-A dark navy theme with dot-matrix sea animals swimming behind the chat. One animal crosses at a time, and the next one starts entering a few seconds before the last one leaves, so at most two are on screen. The full loop is about 4¾ minutes.
+A deep navy theme with dot-matrix sea animals swimming behind the chat, plus a pale sea-foam light mode. One animal crosses at a time, and the next one starts entering a few seconds before the last one leaves, so at most two are on screen. The full loop is about 4¾ minutes.
 
 ![Home screen](preview/home.gif)
 
 ## Screenshots
 
-| New thread | Inside a conversation |
-| --- | --- |
-| ![New thread screen](preview/home.png) | ![Conversation screen](preview/conversation.png) |
+| | New thread | Inside a conversation |
+| --- | --- | --- |
+| **Dark** | ![Dark new thread screen](preview/home.png) | ![Dark conversation screen](preview/conversation.png) |
+| **Light** | ![Light new thread screen](preview/home-light.png) | ![Light conversation screen](preview/conversation-light.png) |
+
+## Light mode
+
+Dark is the theme's main appearance. When T3 is set to light (or to follow the system and the system is light), the same animals swim over pale sea-foam water, slightly softened so the saturated blue doesn't overpower the page.
+
+![Light mode](preview/home-light.gif)
 
 ## More of the parade
 
@@ -26,7 +33,7 @@ Each one has its own motion: the shark and hammerhead sway their tails, the jell
 
 ## Inside a conversation
 
-Once a thread has messages, the animals dim to about 40% brightness so they don't compete with the text. The empty new-thread page shows them at full brightness.
+Once a thread has messages, the animals dim (to about 40% brightness in dark mode, more in light mode) so they don't compete with the text. The empty new-thread page shows them at full strength.
 
 ![Conversation view](preview/conversation.gif)
 
@@ -38,11 +45,12 @@ T3 themes can't run JavaScript or load files, so the whole background is one ani
 
 - Every animal shares one timeline the length of the full loop. `keyTimes`/`keyPoints` keep each animal parked off-screen except during its own window, which is how they take turns.
 - The dot-matrix look comes from two SVG `<pattern>` fills (a 3×3 tile of dots in four shades of blue), so each silhouette is just a path filled with dots. Tails and tentacles are dotted strokes (`stroke-dasharray="0 5"` with round caps).
-- Dimming in conversations uses `:has([data-timeline-row-kind])` to switch a translucent layer on top of the background.
+- Dimming in conversations uses `:has([data-timeline-row-kind])` to switch a translucent veil on top of the background.
+- Both appearances share one embedded SVG. Light mode (`:root:not(.dark)`) only swaps CSS variables for the water color, glow and veil, which keeps the CSS under T3's size limit. The colors for each mode are the `DARK` and `LIGHT` dictionaries in `generate.py`.
 
 ## About the previews
 
-The screenshots and GIFs are rendered in Chrome from `background.svg`, placed inside a T3-style window mockup. They aren't captures of the T3 Code app itself. The GIFs play in real time.
+The screenshots and GIFs are rendered in Chrome from the theme's own CSS or `background.svg`, placed inside a T3-style window mockup. They aren't captures of the T3 Code app itself. The GIFs play in real time.
 
 ## Editing
 
@@ -52,7 +60,7 @@ All the shapes, paths, timings and colors live in `generate.py`. After changing 
 python3 generate.py
 ```
 
-This rewrites `background.svg`, `theme.css`, `theme.json` and `preview/gallery.svg`. The script checks that the SVG is valid XML (one bad attribute blanks the whole background) and that the CSS stays under T3's 20,000-character limit. It currently uses about 18,400.
+This rewrites `background.svg`, `theme.css`, `theme.json` and `preview/gallery.svg`. The script checks that the SVG is valid XML (one bad attribute blanks the whole background) and that the CSS stays under T3's 20,000-character limit. It currently uses about 18,600.
 
 To add an animal, define its body facing +x with its head near the origin, then add a row to the `parade` list:
 

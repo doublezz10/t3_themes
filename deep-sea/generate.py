@@ -172,18 +172,32 @@ xml.dom.minidom.parseString(svg)  # an XML error would silently blank the whole 
 open(os.path.join(OUT, "background.svg"), "w").write(svg)
 
 enc = svg.replace("%", "%25").replace("#", "%23").replace("<", "%3C").replace(">", "%3E")
-A = '.dark [data-workspace-area="conversation"]'
-css = (f'{A}{{--sea:url("data:image/svg+xml,{enc}");--dim:linear-gradient(#0d101600,#0d101600);'
-       f'background:var(--dim),radial-gradient(ellipse at 50% 0%,rgba(47,95,224,.07),transparent 60%),var(--sea) center/cover no-repeat,#0d1016!important}}'
-       f'{A}:has([data-timeline-row-kind]){{--dim:linear-gradient(#0d101699,#0d101699)}}'
+# Colors per appearance. The same background SVG serves both; only the water color,
+# the glow and the veil that softens the animals change. "veil" applies everywhere,
+# "veil_chat" once a thread has messages, so the animals don't fight the text.
+DARK = {"bg": "#0d1016", "glow": "rgba(47,95,224,.07)", "veil": "#0d101600", "veil_chat": "#0d101699"}
+LIGHT = {"bg": "#eef4fa", "glow": "rgba(47,95,224,.12)", "veil": "#eef4fa40", "veil_chat": "#eef4fac0"}
+
+A = '[data-workspace-area="conversation"]'
+L = f':root:not(.dark) {A}'  # light appearance
+HAS_MSG = ':has([data-timeline-row-kind])'
+css = (f'{A}{{--sea:url("data:image/svg+xml,{enc}");--bg:{DARK["bg"]};--glow:{DARK["glow"]};--veil:{DARK["veil"]};'
+       'background:linear-gradient(var(--veil),var(--veil)),radial-gradient(ellipse at 50% 0%,var(--glow),transparent 60%),'
+       'var(--sea) center/cover no-repeat,var(--bg)!important}'
+       f'{A}{HAS_MSG}{{--veil:{DARK["veil_chat"]}}}'
+       f'{L}{{--bg:{LIGHT["bg"]};--glow:{LIGHT["glow"]};--veil:{LIGHT["veil"]}}}'
+       f'{L}{HAS_MSG}{{--veil:{LIGHT["veil_chat"]}}}'
        f'{A} .messages-timeline-scroll,{A} [data-chat-composer-form]{{background:transparent!important}}'
-       f'@media (prefers-reduced-motion:reduce){{{A}{{background:#0d1016!important}}}}')
+       f'@media (prefers-reduced-motion:reduce){{{A}{{background:var(--bg)!important}}}}')
 assert len(css) <= 20000, f"theme css is {len(css)} chars; T3 allows 20,000"
 open(os.path.join(OUT, "theme.css"), "w").write(css)
 
 # The object T3's theme tool takes (t3_theme_set, themeId "deep-sea").
-theme = {"version": 1, "name": "Deep Sea", "appearance": "dark", "canvas": "#0d1016", "accent": "#3b6cf6",
-         "colors": {"sidebar": "#0a0b0d", "chrome": "#0a0b0d", "toolbar": "#0a0b0d"}, "css": css}
+# Dark is the primary appearance; variants.light restyles the chrome for light mode.
+theme = {"version": 1, "name": "Deep Sea", "appearance": "dark", "canvas": DARK["bg"], "accent": "#3b6cf6",
+         "colors": {"sidebar": "#0a0b0d", "chrome": "#0a0b0d", "toolbar": "#0a0b0d"},
+         "variants": {"light": {"canvas": LIGHT["bg"], "sidebar": "#e3eaf3", "chrome": "#e3eaf3", "toolbar": "#e3eaf3"}},
+         "css": css}
 with open(os.path.join(OUT, "theme.json"), "w") as fh:
     json.dump(theme, fh, indent=2)
     fh.write("\n")

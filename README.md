@@ -4,7 +4,7 @@ Custom themes for T3 Code. Each folder holds one theme.
 
 | Theme | Preview |
 | --- | --- |
-| [Deep Sea](deep-sea/): 16 dot-matrix sea animals take turns swimming behind the chat | ![Deep Sea](deep-sea/preview/home.gif) |
+| [Deep Sea](deep-sea/): 16 dot-matrix sea animals take turns swimming behind the chat. Dark and light modes. | ![Deep Sea](deep-sea/preview/home.gif) |
 
 ## Installing a theme
 
