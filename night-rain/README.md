@@ -1,6 +1,6 @@
 # Night Rain
 
-Calm rain behind the chat. Three layers of dotted rain fall at a slight angle, ripples spread across the ground, drops slide slowly down the glass, and a faint flash of distant lightning passes about once a minute. Now and then something drifts by in the rain, with long stretches of plain rain in between. Dark mode is a deep blue-gray night; light mode is an overcast afternoon.
+Calm rain behind the whole window. Three layers of dotted rain fall at a slight angle, ripples spread across the ground, drops slide slowly down the glass, and a faint flash of distant lightning passes about once a minute. Now and then something drifts by in the rain, with long stretches of plain rain in between. Dark mode is a deep blue-gray night; light mode is an overcast afternoon.
 
 ![Night Rain](preview/home.gif)
 
@@ -17,7 +17,7 @@ Calm rain behind the chat. Three layers of dotted rain fall at a slight angle, r
 - **Ripples:** dotted rings that spread and fade on the ground, on staggered timers so they never sync up.
 - **Drops on the glass:** a few drops trickle down with a short trail, wandering a little side to side.
 - **Lightning:** a very faint double flicker across the whole background about once a minute. It is deliberately subtle.
-- **Passers-by:** a paper boat floating along the bottom, a gull, a lost umbrella, and a falling leaf. They take turns in three shuffled rounds, each pass on a different lane, with about 14 seconds of plain rain between them. The loop is about 7½ minutes.
+- **Passers-by:** a paper boat floating along the bottom, a gull, a lost umbrella, and a falling leaf. They take turns in three shuffled rounds, each pass on a different curving route (the boat stays on the water), with about 14 seconds of plain rain between them. The loop is about 7½ minutes.
 
 ![Passers-by](preview/gallery.png)
 
@@ -56,7 +56,7 @@ python3 night-rain/generate.py
 python3 common/preview.py night-rain      # optional: re-render the previews
 ```
 
-The CSS currently uses about 15,800 of T3's 20,000 characters, so there's room for another passer-by or two.
+The CSS currently uses about 16,500 of T3's 20,000 characters, so there's room for another passer-by or two.
 
 ## About the previews
 

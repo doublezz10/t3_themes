@@ -106,7 +106,7 @@ leaf = ("<g>" + spin("-35 0 0;35 0 0;-35 0 0", 3)
         f"<path d='M0,16L0,26' {dotted(NEAR, 2.4, 4)}/></g>")
 
 cast = [
-    Actor("paper boat", boat, 1.3, 34, "M-200,880C400,868 1000,894 1820,876", rotate=False, lanes=((0, 0), (-30, 25))),
+    Actor("paper boat", boat, 1.3, 34, "M-200,880C400,868 1000,894 1820,876", rotate=False, lanes=((0, 0), (-30, 25)), wander=0),
     Actor("gull", gull, 1.2, 15, "M-150,230C300,170 900,270 1760,190", rotate=False, opacity=.8, lanes=((0, 0), (-60, 160))),
     Actor("umbrella", umbrella, 1.3, 30, "M1820,160C1300,320 800,260-220,620", rotate=False, opacity=.85),
     Actor("leaf", leaf, 1.8, 22, "M420,-120C700,180 220,420 560,700S360,900 640,1150", rotate=False, opacity=.85,
@@ -121,6 +121,8 @@ svg = build_svg(defs, haze, rain, ripples, passers, glass, lightning)
 
 DARK = {"bg": "#0b0f14", "glow": "rgba(127,163,200,.06)", "veil": "#0b0f1400", "veil_chat": "#0b0f1499"}
 LIGHT = {"bg": "#e6ecf2", "glow": "rgba(79,107,138,.10)", "veil": "#e6ecf21a", "veil_chat": "#e6ecf2b8"}
+DARK.update(accent="#5b8cc4", sidebar="#080b0f")
+LIGHT.update(accent="#5b8cc4", sidebar="#dae2ea")
 css = build_css(svg, DARK, LIGHT)
 
 gallery = gallery_svg(defs, cast, DARK["bg"], cols=4, fit={a.name: (a.scale * 1.4, -40, False) for a in cast})

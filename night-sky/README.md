@@ -1,6 +1,6 @@
 # Night Sky
 
-A calm, clear night behind the chat. A slowly turning starfield with a faint Milky Way, constellations that take turns drawing themselves line by line, and the occasional shooting star, satellite or comet. Dark mode only.
+A calm, clear night behind the whole window. A slowly turning starfield with a faint Milky Way, constellations that take turns drawing themselves line by line, and the occasional shooting star, satellite or comet. Dark mode only.
 
 ![Home screen](preview/home.gif)
 
@@ -54,4 +54,4 @@ python3 generate.py
 python3 ../common/preview.py .   # optional: refresh the screenshots and GIFs
 ```
 
-The CSS is at about 19,400 of T3's 20,000-character limit, so there's little room for more constellations unless something else gets trimmed. Fewer twinkling stars, or a smaller star tile, would free up space.
+The CSS is at about 18,800 of T3's 20,000-character limit, so there's room for one more constellation before something needs trimming. Fewer twinkling stars, or a smaller star tile, would free up space.

@@ -1,6 +1,6 @@
 {
  "id": "aurora",
- "loop_seconds": 497.9,
+ "loop_seconds": 967.5,
  "has_light": false,
  "schedule": [
   {
@@ -9,59 +9,89 @@
    "end": 46.5
   },
   {
-   "name": "shooting star",
-   "start": 68.5,
-   "end": 71.1
+   "name": "three birds",
+   "start": 82.19,
+   "end": 108.19
   },
   {
    "name": "birds",
-   "start": 93.1,
-   "end": 127.1
+   "start": 138.44,
+   "end": 172.44
+  },
+  {
+   "name": "shooting star",
+   "start": 216.95,
+   "end": 219.55
+  },
+  {
+   "name": "fireball",
+   "start": 265.66,
+   "end": 270.16
   },
   {
    "name": "shooting star 2",
-   "start": 149.1,
-   "end": 151.3
+   "start": 297.06,
+   "end": 299.26
+  },
+  {
+   "name": "birds",
+   "start": 349.32,
+   "end": 383.32
+  },
+  {
+   "name": "fireball",
+   "start": 402.2,
+   "end": 406.7
+  },
+  {
+   "name": "three birds",
+   "start": 446.48,
+   "end": 472.48
+  },
+  {
+   "name": "shooting star",
+   "start": 499.33,
+   "end": 501.93
+  },
+  {
+   "name": "shooting star 2",
+   "start": 529.17,
+   "end": 531.37
   },
   {
    "name": "satellite",
-   "start": 173.3,
-   "end": 219.3
+   "start": 554.97,
+   "end": 600.97
+  },
+  {
+   "name": "shooting star 2",
+   "start": 628.82,
+   "end": 631.02
+  },
+  {
+   "name": "three birds",
+   "start": 678.51,
+   "end": 704.51
   },
   {
    "name": "shooting star",
-   "start": 241.3,
-   "end": 243.9
+   "start": 755.18,
+   "end": 757.78
   },
   {
-   "name": "shooting star 2",
-   "start": 265.9,
-   "end": 268.1
+   "name": "fireball",
+   "start": 804.63,
+   "end": 809.13
   },
   {
    "name": "birds",
-   "start": 290.1,
-   "end": 324.1
-  },
-  {
-   "name": "shooting star 2",
-   "start": 346.1,
-   "end": 348.3
+   "start": 839.79,
+   "end": 873.79
   },
   {
    "name": "satellite",
-   "start": 370.3,
-   "end": 416.3
-  },
-  {
-   "name": "birds",
-   "start": 438.3,
-   "end": 472.3
-  },
-  {
-   "name": "shooting star",
-   "start": 494.3,
-   "end": 496.9
+   "start": 920.51,
+   "end": 966.51
   }
  ]
 }

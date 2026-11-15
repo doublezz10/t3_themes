@@ -137,14 +137,14 @@ cast = [
     Actor("orca", orca, 1.4, 18, H.format(s=800, y=560, a=500, b=620, c=540)),
     Actor("narwhal", narwhal, 1.4, 22, R.format(y=430, a=470, b=380, c=440, e=500), flip=True),
     Actor("beluga", beluga, 1.4, 22, H.format(s=600, y=500, a=560, b=450, c=520), opacity=.85),
-    Actor("penguins", penguins, 1.8, 26, "M-350,800L1900,800", rotate=False, lanes=ground),
+    Actor("penguins", penguins, 1.8, 26, "M-350,800L1900,800", rotate=False, lanes=ground, wander=0),
     Actor("snowy owl", owl, 1.3, 16, H.format(s=400, y=280, a=220, b=330, c=240), lanes=((0, 0), (-80, 160))),
-    Actor("arctic fox", face_left(fox), 1.6, 20, "M1900,812L-450,812", rotate=False, lanes=ground),
+    Actor("arctic fox", face_left(fox), 1.6, 20, "M1900,812L-450,812", rotate=False, lanes=ground, wander=0),
     Actor("harp seal", seal, 1.4, 18, "M2200,300C1500,420 900,700-500,760", flip=True),
-    Actor("walrus", walrus, 1.3, 30, "M-350,800C200,790 600,812 1000,798S1600,790 1950,804", rotate=False, lanes=ground),
-    Actor("polar bear", bear, 1.4, 26, "M-350,820L1950,820", rotate=False, lanes=ground),
+    Actor("walrus", walrus, 1.3, 30, "M-350,800C200,790 600,812 1000,798S1600,790 1950,804", rotate=False, lanes=ground, wander=0),
+    Actor("polar bear", bear, 1.4, 26, "M-350,820L1950,820", rotate=False, lanes=ground, wander=0),
     Actor("arctic tern", tern, 1.3, 11, R.format(y=330, a=260, b=380, c=300, e=300), lanes=((0, 0), (-120, 140))),
-    Actor("snow hare", face_left(hare), 1.3, 16, "M1900,826L-300,826", rotate=False, lanes=ground),
+    Actor("snow hare", face_left(hare), 1.3, 16, "M1900,826L-300,826", rotate=False, lanes=ground, wander=0),
     Actor("puffin", puffin, 1.7, 13, H.format(s=300, y=360, a=300, b=420, c=340), lanes=((0, 0), (-120, 160))),
 ]
 
@@ -153,6 +153,8 @@ svg = build_svg(defs, snow, animals)
 
 DARK = {"bg": "#0c1117", "glow": "rgba(111,168,220,.08)", "veil": "#0c111700", "veil_chat": "#0c111799"}
 LIGHT = {"bg": "#eef4f8", "glow": "rgba(91,155,213,.14)", "veil": "#eef4f826", "veil_chat": "#eef4f8b8"}
+DARK.update(accent="#5b9bd5", sidebar="#090d12")
+LIGHT.update(accent="#5b9bd5", sidebar="#e2eaf1")
 css = build_css(svg, DARK, LIGHT)
 
 gallery = gallery_svg(defs, cast, DARK["bg"], fit={"orca": (.8, 60, False)})

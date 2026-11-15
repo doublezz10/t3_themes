@@ -160,6 +160,7 @@ snow = specks(16, C2, seed=9, radii=(1, 1.3, 1.6), opacities=(.12, .2, .3), twin
 svg = build_svg(defs, snow, creatures)
 
 DARK = {"bg": ABYSS, "glow": "rgba(43,196,196,.05)", "veil": "#05080d00", "veil_chat": "#05080dbb"}
+DARK.update(accent="#2bc4c4", sidebar="#04060a")
 css = build_css(svg, DARK)
 
 gallery = gallery_svg(defs, cast, ABYSS, fit={"siphonophore": (.75, 120, False)})

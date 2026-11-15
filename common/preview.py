@@ -38,32 +38,36 @@ PALETTES = {
                   box="rgba(255,255,255,.92)", boxb="#d3dbe6", line="#d7dfe9", border="#d7dfe9"),
 }
 
-MESSAGES = """<div data-timeline-row-kind=message><div class=row><div class=ub>Can you add a jitter plot of the per-mouse firing rates to Fig. 3b, matching the existing palette?</div></div>
+MESSAGES = """<div data-timeline-row-kind=message><div class=row><div class=ub data-user-message-bubble>Can you add a jitter plot of the per-mouse firing rates to Fig. 3b, matching the existing palette?</div></div>
 <div class=as><p>Done. I added a strip plot of per-mouse means on top of the bars in <code>fig3.py</code>, using the same two-tone palette, and ran the figure checker.</p>
 <pre>ax.scatter(x + jitter, rates, s=9, color=PALETTE["key"],
            alpha=.8, linewidths=0, zorder=3)
 pubfig.finalize_figure(fig, "fig3b.pdf")</pre>
 <p>The checker passed with no warnings. Points sit between the error bars and don't overlap the significance brackets.</p></div>
-<div class=row><div class=ub>Nice, can you make the dots a bit bigger?</div></div>
+<div class=row><div class=ub data-user-message-bubble>Nice, can you make the dots a bit bigger?</div></div>
 <div class=as><p>Bumped the marker size from 9 to 14 and re-exported. Updated figure is at <code>figures/fig3b.pdf</code>.</p></div></div>"""
 
 
 def mock_html(css, theme, mode, view):
     c = dict(PALETTES[mode])
-    colors = theme.get("colors", {})
-    if mode == "dark":
-        c["win"] = colors.get("sidebar", "#0a0b0d")
-    else:
-        c["win"] = theme.get("variants", {}).get("light", {}).get("sidebar", "#e3eaf3")
+    roles = theme.get("colors", {}) if mode == "dark" else theme.get("variants", {}).get("light", {})
+    c["win"] = roles.get("sidebar", "#0a0b0d" if mode == "dark" else "#e3eaf3")
+    # use the theme's own color roles where the mockup has a matching surface
+    for key, role in (("code", "codeBackground"), ("bub", "messageSurface"), ("act", "sidebarRowSelected"),
+                      ("inl", "muted"), ("boxb", "border"), ("codeb", "border")):
+        if role in roles:
+            c[key] = roles[role]
+    if "surfaceOverlay" in roles:
+        c["box"] = roles["surfaceOverlay"] + "eb"
     conv = view == "conversation"
-    composer = "<div class=box>Ask anything, / for commands, @ for context</div>"
-    body = (f"<div class=hdr>Fig 3b jitter plot</div><div class=feed>{MESSAGES}</div><div class='comp bot'>{composer}</div>" if conv else
+    composer = "<div class=box data-slot=composer-host>Ask anything, / for commands, @ for context</div>"
+    body = (f"<div class=hdr data-chat-header>Fig 3b jitter plot</div><div class=feed>{MESSAGES}</div><div class='comp bot'>{composer}</div>" if conv else
             f"<div class=comp>{composer}<div class=bar><span>Full access</span><span>project</span><span>main</span><b>Opus 5.5</b></div></div>")
-    threads = ('<div class="th a">Fig 3b jitter plot</div><div class=th>Theme ideas</div>' if conv
+    threads = ('<div data-thread-item><div class="th a" aria-current=page>Fig 3b jitter plot</div></div><div class=th>Theme ideas</div>' if conv
                else '<div class=th>Theme ideas</div><div class=th>Fig 3b jitter plot</div>')
     return f"""<!doctype html><html class="{'dark' if mode == 'dark' else ''}"><head><meta charset=utf-8><style>
 *{{box-sizing:border-box}}body{{margin:0;background:{c['page']};font:13px -apple-system,BlinkMacSystemFont,sans-serif;color:{c['txt']}}}
-.win{{position:absolute;inset:14px;border-radius:12px;overflow:hidden;background:{c['win']};display:flex;box-shadow:0 10px 40px rgba(0,0,0,.35)}}
+.win{{position:absolute;inset:14px;border-radius:12px;overflow:hidden;background:{c['win']};display:flex;box-shadow:0 10px 40px rgba(0,0,0,.35);transform:translateZ(0)}}
 .side{{width:220px;padding:12px 8px;display:flex;flex-direction:column;gap:2px;color:{c['side']}}}
 .dots span{{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px}}
 .it{{padding:7px 10px;border-radius:7px}} .it.a,.th.a{{background:{c['act']}}} .lbl{{color:{c['mut']};font-size:11px;padding:16px 10px 6px}} .th{{padding:7px 10px;border-radius:7px}}
@@ -76,8 +80,8 @@ pre{{font:12.5px/1.5 ui-monospace,Menlo,monospace;background:{c['code']};border:
 .comp{{position:absolute;left:50%;top:44%;transform:translateX(-50%);width:520px}} .comp.bot{{top:auto;bottom:18px;width:640px}}
 .box{{background:{c['box']};border:1px solid {c['boxb']};border-radius:12px;padding:12px 14px 36px;color:{c['mut']}}}
 .bar{{margin:0 10px;background:{c['box']};border:1px solid {c['boxb']};border-top:0;border-radius:0 0 10px 10px;padding:7px 12px;color:{c['mut']};font-size:12px;display:flex;gap:16px}} .bar b{{margin-left:auto;font-weight:500}}
-{css}</style></head><body><div class=win>
-<div class=side><div class=dots style="padding:2px 6px 14px"><span style=background:#ff5f57></span><span style=background:#febc2e></span><span style=background:#28c840></span></div>
+{css}</style></head><body><div class=win data-slot=sidebar-wrapper>
+<div class=side data-slot=sidebar-inner><div class=dots style="padding:2px 6px 14px"><span style=background:#ff5f57></span><span style=background:#febc2e></span><span style=background:#28c840></span></div>
 <div class="it{'' if conv else ' a'}">New thread</div><div class=it>Pull requests</div><div class=it>Usage</div><div class=lbl>Threads</div>{threads}</div>
 <div data-workspace-area=conversation>{body}</div></div></body></html>"""
 

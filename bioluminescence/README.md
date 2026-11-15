@@ -1,6 +1,6 @@
 # Bioluminescence
 
-The deep abyss, darker than [Deep Sea](../deep-sea/), where every creature makes its own light. Glowing animals take turns drifting behind the chat: one crosses at a time, and the next starts arriving a few seconds before the last one leaves, so at most two are on screen. The loop runs three rounds, each in a shuffled order with every creature on a different lane, so it takes about 8 minutes to repeat.
+The deep abyss, darker than [Deep Sea](../deep-sea/), where every creature makes its own light. Glowing animals take turns drifting behind the whole window: one crosses at a time, and the next starts arriving a few seconds before the last one leaves, so at most two are on screen. The loop runs three rounds, each in a shuffled order with every creature on a different curving route, so it takes about 8 minutes to repeat.
 
 Dark mode only.
 
@@ -62,4 +62,4 @@ python3 generate.py
 python3 ../common/preview.py .   # optional: refresh the screenshots and GIFs
 ```
 
-This rewrites `background.svg`, `theme.css`, `theme.json` and `preview/gallery.svg`. The toolkit checks that the SVG is valid XML and that the CSS stays under T3's 20,000-character limit. This theme uses about 19,600, so there's little room left: share definitions with `<use>` and group blinking lights under one animation rather than giving each its own.
+This rewrites `background.svg`, `theme.css`, `theme.json` and `preview/gallery.svg`. The toolkit checks that the SVG is valid XML and that the CSS stays under T3's 20,000-character limit. This theme uses about 19,900, so there's almost no room left: share definitions with `<use>` and group blinking lights under one animation rather than giving each its own.

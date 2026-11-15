@@ -122,15 +122,17 @@ cast = [
     Actor("hammerhead", hammer, 1.5, 18, "M-500,250C300,350 1000,650 2200,800"),
     Actor("pufferfish", puffer, 1.5, 25, R.format(y=330, a=280, b=400, c=320, e=700), flip=True, lanes=((0, 0), (-60, 250))),
     Actor("squid", squid, 1.4, 18, "M2100,180C1400,260 900,520-500,720", opacity=.85),
-    Actor("crab", crab, 1.3, 22, "M1800,820C1200,800 600,840-200,820", rotate=False, opacity=.85, lanes=((0, 0), (-25, 15))),
+    Actor("crab", crab, 1.3, 22, "M1800,820C1200,800 600,840-200,820", rotate=False, opacity=.85, lanes=((0, 0), (-25, 15)), wander=0),
 ]
 
 animals, loop, schedule = parade(cast, rounds=3, seed=11)
-plankton = specks(18, M, seed=7)
+plankton = specks(12, M, seed=7)
 svg = build_svg(defs, plankton, animals)
 
 DARK = {"bg": "#0d1016", "glow": "rgba(47,95,224,.07)", "veil": "#0d101600", "veil_chat": "#0d101699"}
 LIGHT = {"bg": "#eef4fa", "glow": "rgba(47,95,224,.12)", "veil": "#eef4fa40", "veil_chat": "#eef4fac0"}
+DARK.update(accent="#3b6cf6", sidebar="#0a0b0d")
+LIGHT.update(accent="#3b6cf6", sidebar="#e3eaf3")
 css = build_css(svg, DARK, LIGHT)
 
 gallery = gallery_svg(defs, cast, DARK["bg"], fit={"whale": (.55, 120, False)})

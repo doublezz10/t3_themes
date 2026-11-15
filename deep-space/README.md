@@ -1,6 +1,6 @@
 # Deep Space
 
-A near-black violet theme with dot-matrix space objects drifting behind the chat over a twinkling starfield. One object crosses at a time, and the next starts entering a few seconds before the last one leaves, so at most two are on screen. The loop runs about 11 minutes: three rounds, each in a different shuffled order, with every object taking a different lane each time.
+A near-black violet theme with dot-matrix space objects drifting behind the whole window over a twinkling starfield. One object crosses at a time, and the next starts entering a few seconds before the last one leaves, so at most two are on screen. The loop runs about 11 minutes: three rounds, each in a different shuffled order, with every object taking a different curving route each time.
 
 Dark mode only.
 
@@ -49,7 +49,7 @@ If your system's "Reduce motion" setting is on, the animation is replaced with a
 
 Like every theme in this repo, the background is one animated SVG (SMIL) embedded in the theme CSS as a `data:` URL, built with the shared toolkit in [`../common/themekit.py`](../common/themekit.py):
 
-- `Actor` and `parade()` schedule the objects so they take turns, over three shuffled rounds with a different lane on each pass.
+- `Actor` and `parade()` schedule the objects so they take turns, over three shuffled rounds with a different curving route on each pass.
 - `dot_pattern()` gives the dot-matrix fill: a violet texture for bodies and a cyan one for accents.
 - `specks()` scatters the stars.
 - `build_css()` adds the conversation dimming.
@@ -66,6 +66,6 @@ All shapes, paths, timings and colors live in `generate.py`. After changing it, 
 python3 generate.py
 ```
 
-This rewrites `background.svg`, `theme.css`, `theme.json`, `preview/gallery.svg` and `preview/timeline.json`. The toolkit checks that the SVG is valid XML and that the CSS stays under T3's 20,000-character limit. Deep Space currently uses about 18,400.
+This rewrites `background.svg`, `theme.css`, `theme.json`, `preview/gallery.svg` and `preview/timeline.json`. The toolkit checks that the SVG is valid XML and that the CSS stays under T3's 20,000-character limit. Deep Space currently uses about 17,500.
 
 To add an object, define its body facing +x with its front near the origin, then add an `Actor(...)` to the `cast` list. Use `rotate=False` for things that should keep their orientation (planets, the UFO), and `flip=True` for side-view bodies that travel right to left.

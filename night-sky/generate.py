@@ -217,6 +217,7 @@ sky = ("<g><animateTransform attributeName='transform' type='translate' dur='240
 
 svg = build_svg(defs, sky, sky_figures, movers)
 DARK = {"bg": BG, "glow": "rgba(110,130,255,.06)", "veil": "#0a0d1800", "veil_chat": "#0a0d1880"}
+DARK.update(accent="#7aa8ff", sidebar="#080a12")
 css = build_css(svg, DARK)
 
 
