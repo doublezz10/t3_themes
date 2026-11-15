@@ -31,3 +31,7 @@ Themes apply to the desktop and web apps. The T3 mobile app does not use custom 
 - A theme's custom CSS can be at most 20,000 characters.
 - CSS cannot load files, so images have to be embedded as `data:` URLs.
 - Only the stable selectors T3 documents (such as `[data-workspace-area="conversation"]`) are safe to target; other class names change between releases.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
