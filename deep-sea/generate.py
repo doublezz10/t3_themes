@@ -1,51 +1,32 @@
 """Generate the Deep Sea T3 Code theme.
 
-A parade of dot-matrix sea animals swims behind the chat area, one or two on
-screen at a time. The background is an animated SVG (SMIL) embedded in the
-theme CSS as a data: URL, because T3 themes cannot load external files.
+Dot-matrix sea animals take turns swimming behind the chat area, one or two on
+screen at a time. Three rounds, each in a shuffled order and with every animal
+on a different lane, make up one loop. See ../common/themekit.py for how the
+background is built.
 
     python3 generate.py
 
-writes background.svg, theme.css, theme.json and preview/gallery.svg next to
-this script. The output is deterministic (fixed random seed).
+The output is deterministic (fixed seeds).
 """
-import json
 import math
 import os
 import random
-import xml.dom.minidom
+import sys
 
-random.seed(7)
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "common"))
+from themekit import (Actor, blink, build_css, build_svg, dot_pattern, gallery_svg, parade, pulse, specks,  # noqa: E402
+                      spin, wave, write_theme)
+
 OUT = os.path.dirname(os.path.abspath(__file__))
+rng = random.Random(7)
 B, M, L, W = "#2f5fe0", "#4a7bf0", "#8fb0ff", "#dfe8ff"
-OVERLAP = 4  # seconds the next animal overlaps the previous one
-
-
-def pat(pid, step, r, cols):
-    s = f"<pattern id='{pid}' width='{step*3}' height='{step*3}' patternUnits='userSpaceOnUse'>"
-    for i in range(9):
-        s += f"<circle cx='{i%3*step+step/2:g}' cy='{i//3*step+step/2:g}' r='{r}' fill='{cols[i]}'/>"
-    return s + "</pattern>"
-
-
-def wave(a, b, dur):  # animate a path's d between two shapes
-    return f"<animate attributeName='d' dur='{dur}s' repeatCount='indefinite' values='{a};{b};{a}'/>"
-
-
-def spin(vals, dur):
-    return f"<animateTransform attributeName='transform' type='rotate' dur='{dur}s' repeatCount='indefinite' values='{vals}'/>"
-
-
-def pulse(vals, dur):
-    return f"<animateTransform attributeName='transform' type='scale' dur='{dur}s' repeatCount='indefinite' values='{vals}'/>"
-
-
 DOT = f"fill='none' stroke='{M}' stroke-linecap='round' stroke-dasharray='0 5'"
 
-defs = (pat("d", 5, 1.75, [B, M, B, L, B, M, B, W, M])
-        + pat("f", 4, 1.45, [M, B, L, B, W, B, M, B, L]))
+defs = (dot_pattern("d", 5, 1.75, [B, M, B, L, B, M, B, W, M])
+        + dot_pattern("f", 4, 1.45, [M, B, L, B, W, B, M, B, L]))
 
-# ---------- bodies (facing +x, head near origin) ----------
+# ---------- Bodies: drawn facing +x, head near the origin ----------
 ta, tb = "M-185,0C-215,-1-245,-8-290,-14", "M-185,0C-215,2-245,10-290,16"
 shark = ("<path d='M0,0C-8,-9-30,-13-55,-14L-70,-14L-118,-58L-104,-13L-150,-8L-185,-4L-185,4L-150,8"
          "L-112,11L-132,44L-84,14L-55,14C-30,13-8,9,0,0Z' fill='url(#d)'/>"
@@ -58,10 +39,10 @@ ray = ("<g transform='rotate(90)'><g>" + pulse("1 1;.62 1;1 1", 3.2)
 defs += "<g id='fi'><ellipse rx='10' ry='4.5' fill='url(#f)'/><path d='M-9,0L-16,-4L-16,4Z' fill='url(#f)'/></g>"
 school = ""
 for i in range(14):
-    x = random.uniform(-110, 110)
-    y = random.uniform(-45, 45) + x * .18
+    x = rng.uniform(-110, 110)
+    y = rng.uniform(-45, 45) + x * .18
     school += (f"<use href='#fi' x='{x:.0f}' y='{y:.0f}'><animateTransform attributeName='transform' type='translate' "
-               f"dur='{random.uniform(1.6, 2.6):.1f}s' repeatCount='indefinite' values='0 0;3 {random.uniform(2, 5):.0f};0 0'/></use>")
+               f"dur='{rng.uniform(1.6, 2.6):.1f}s' repeatCount='indefinite' values='0 0;3 {rng.uniform(2, 5):.0f};0 0'/></use>")
 
 ja, jb = "M0,6C8,40-8,80 0,120", "M0,6C-8,40 8,80 0,120"
 defs += f"<path id='jt' d='{ja}'>{wave(ja, jb, 2.4)}</path>"
@@ -120,95 +101,40 @@ hammer = ("<path d='M4,-38L28,-38L28,38L4,38L0,8L-60,10L-130,4L-140,0L-130,-4L-6
           "M-24,-9L-58,-42L-52,-9ZM-24,9L-58,42L-52,9Z' fill='url(#d)'/>"
           f"<path d='{ha}' {DOT} stroke-width='3.4'>{wave(ha, hb, 1.4)}</path>")
 
-# ---------- parade: (name, body, scale, duration, path, rotate, flip, opacity) ----------
+# ---------- Cast ----------
+# Paths start and end well off-screen. lanes = ((dx range), (dy range)) shifts
+# the path on each pass; the defaults suit most animals.
 H = "M-700,{y}C300,{a} 1000,{b} 2300,{c}"
 R = "M2300,{y}C1300,{a} 600,{b} -{e},{c}"
-parade = [
-    ("shark", shark, 1.6, 18, H.format(y=640, a=560, b=700, c=600), 1, 0, .9),
-    ("jelly", jelly, 1.5, 26, "M1150,1250C1050,900 1250,500 1100,-300", 0, 0, .85),
-    ("school", f"<g>{school}</g>", 1.5, 22, R.format(y=760, a=700, b=820, c=700, e=700), 1, 0, .85),
-    ("turtle", turtle, 1.4, 22, "M-250,900C400,700 900,500 1850,150", 1, 0, .9),
-    ("swordfish", sword, 1.4, 12, H.format(y=380, a=420, b=330, c=400), 1, 0, .9),
-    ("octopus", octo, 1.3, 18, "M500,1300C600,900 900,600 1300,-300", 1, 0, .85),
-    ("whale", whale, 1.1, 38, R.format(y=470, a=430, b=520, c=460, e=1000), 1, 1, .7),
-    ("seahorse", seahorse, 1.7, 24, "M-150,520C250,420 450,640 800,520S1400,420 1750,560", 0, 0, .9),
-    ("ray", ray, 1.6, 20, "M300,1250C380,900 520,500 420,-300", 1, 0, .85),
-    ("anglerfish", angler, 1.5, 22, H.format(y=300, a=360, b=260, c=320), 1, 0, .9),
-    ("eel", eel, 1.3, 23, R.format(y=780, a=740, b=820, c=760, e=700), 1, 0, .85),
-    ("dolphin", dolphin, 1.5, 15, "M-450,760C300,330 1100,330 2300,700", 1, 0, .9),
-    ("hammerhead", hammer, 1.5, 18, "M-500,250C300,350 1000,650 2200,800", 1, 0, .9),
-    ("puffer", puffer, 1.5, 25, R.format(y=330, a=280, b=400, c=320, e=700), 1, 1, .9),
-    ("squid", squid, 1.4, 18, "M2100,180C1400,260 900,520-500,720", 1, 0, .85),
-    ("crab", crab, 1.3, 22, "M1800,820C1200,800 600,840-200,820", 0, 0, .85),
+cast = [
+    Actor("shark", shark, 1.6, 18, H.format(y=640, a=560, b=700, c=600)),
+    Actor("jellyfish", jelly, 1.5, 26, "M1150,1250C1050,900 1250,500 1100,-300", rotate=False, opacity=.85),
+    Actor("school", f"<g>{school}</g>", 1.5, 22, R.format(y=760, a=700, b=820, c=700, e=700), opacity=.85, lanes=((0, 0), (-250, 60))),
+    Actor("turtle", turtle, 1.4, 22, "M-250,900C400,700 900,500 1850,150"),
+    Actor("swordfish", sword, 1.4, 12, H.format(y=380, a=420, b=330, c=400)),
+    Actor("octopus", octo, 1.3, 18, "M500,1300C600,900 900,600 1300,-300", opacity=.85),
+    Actor("whale", whale, 1.1, 38, R.format(y=470, a=430, b=520, c=460, e=1000), flip=True, opacity=.7),
+    Actor("seahorse", seahorse, 1.7, 24, "M-150,520C250,420 450,640 800,520S1400,420 1750,560", rotate=False),
+    Actor("ray", ray, 1.6, 20, "M300,1250C380,900 520,500 420,-300", opacity=.85, lanes=((-120, 600), (0, 0))),
+    Actor("anglerfish", angler, 1.5, 22, H.format(y=300, a=360, b=260, c=320), lanes=((0, 0), (-60, 250))),
+    Actor("eel", eel, 1.3, 23, R.format(y=780, a=740, b=820, c=760, e=700), opacity=.85, lanes=((0, 0), (-220, 40))),
+    Actor("dolphin", dolphin, 1.5, 15, "M-450,760C300,330 1100,330 2300,700"),
+    Actor("hammerhead", hammer, 1.5, 18, "M-500,250C300,350 1000,650 2200,800"),
+    Actor("pufferfish", puffer, 1.5, 25, R.format(y=330, a=280, b=400, c=320, e=700), flip=True, lanes=((0, 0), (-60, 250))),
+    Actor("squid", squid, 1.4, 18, "M2100,180C1400,260 900,520-500,720", opacity=.85),
+    Actor("crab", crab, 1.3, 22, "M1800,820C1200,800 600,840-200,820", rotate=False, opacity=.85, lanes=((0, 0), (-25, 15))),
 ]
 
-starts, t = [], .5
-for p in parade:
-    starts.append(t)
-    t += p[3] - OVERLAP
-T = round(starts[-1] + parade[-1][3] + 1, 1)
+animals, loop, schedule = parade(cast, rounds=3, seed=11)
+plankton = specks(18, M, seed=7)
+svg = build_svg(defs, plankton, animals)
 
-ROT = " rotate='auto'"
-animals = ""
-for (name, body, sc, dur, path, rot, flip, op), st in zip(parade, starts):
-    a, b = st / T, (st + dur) / T
-    inner = f"scale({sc},{-sc})" if flip else f"scale({sc})"
-    animals += (f"<g opacity='{op}'><animateMotion dur='{T}s' repeatCount='indefinite' calcMode='linear' "
-                f"keyPoints='0;0;1;1' keyTimes='0;{a:.4f};{b:.4f};1'{ROT if rot else ''} path='{path}'/>"
-                f"<g transform='{inner}'>{body}</g></g>")
-
-plank = ""
-for i in range(30):
-    x, y, o = random.randint(0, 1600), random.randint(0, 1000), random.choice([.25, .35, .5, .65])
-    plank += f"<circle cx='{x}' cy='{y}' r='{random.choice([1.3, 1.6, 2])}' opacity='{o}'"
-    plank += (f"><animate attributeName='opacity' values='{o};.05;{o}' dur='{random.randint(4, 9)}s' repeatCount='indefinite'/></circle>"
-              if i % 4 == 0 else "/>")
-plank = (f"<g fill='{M}'><animateTransform attributeName='transform' type='translate' dur='60s' repeatCount='indefinite' "
-         f"values='0 0;-20 -12;0 0'/>{plank}</g>")
-
-svg = (f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1000' preserveAspectRatio='xMidYMid slice'>"
-       f"<defs>{defs}</defs>{plank}{animals}</svg>")
-xml.dom.minidom.parseString(svg)  # an XML error would silently blank the whole background
-open(os.path.join(OUT, "background.svg"), "w").write(svg)
-
-enc = svg.replace("%", "%25").replace("#", "%23").replace("<", "%3C").replace(">", "%3E")
-# Colors per appearance. The same background SVG serves both; only the water color,
-# the glow and the veil that softens the animals change. "veil" applies everywhere,
-# "veil_chat" once a thread has messages, so the animals don't fight the text.
 DARK = {"bg": "#0d1016", "glow": "rgba(47,95,224,.07)", "veil": "#0d101600", "veil_chat": "#0d101699"}
 LIGHT = {"bg": "#eef4fa", "glow": "rgba(47,95,224,.12)", "veil": "#eef4fa40", "veil_chat": "#eef4fac0"}
+css = build_css(svg, DARK, LIGHT)
 
-A = '[data-workspace-area="conversation"]'
-L = f':root:not(.dark) {A}'  # light appearance
-HAS_MSG = ':has([data-timeline-row-kind])'
-css = (f'{A}{{--sea:url("data:image/svg+xml,{enc}");--bg:{DARK["bg"]};--glow:{DARK["glow"]};--veil:{DARK["veil"]};'
-       'background:linear-gradient(var(--veil),var(--veil)),radial-gradient(ellipse at 50% 0%,var(--glow),transparent 60%),'
-       'var(--sea) center/cover no-repeat,var(--bg)!important}'
-       f'{A}{HAS_MSG}{{--veil:{DARK["veil_chat"]}}}'
-       f'{L}{{--bg:{LIGHT["bg"]};--glow:{LIGHT["glow"]};--veil:{LIGHT["veil"]}}}'
-       f'{L}{HAS_MSG}{{--veil:{LIGHT["veil_chat"]}}}'
-       f'{A} .messages-timeline-scroll,{A} [data-chat-composer-form]{{background:transparent!important}}'
-       f'@media (prefers-reduced-motion:reduce){{{A}{{background:var(--bg)!important}}}}')
-assert len(css) <= 20000, f"theme css is {len(css)} chars; T3 allows 20,000"
-open(os.path.join(OUT, "theme.css"), "w").write(css)
-
-# The object T3's theme tool takes (t3_theme_set, themeId "deep-sea").
-# Dark is the primary appearance; variants.light restyles the chrome for light mode.
-theme = {"version": 1, "name": "Deep Sea", "appearance": "dark", "canvas": DARK["bg"], "accent": "#3b6cf6",
-         "colors": {"sidebar": "#0a0b0d", "chrome": "#0a0b0d", "toolbar": "#0a0b0d"},
-         "variants": {"light": {"canvas": LIGHT["bg"], "sidebar": "#e3eaf3", "chrome": "#e3eaf3", "toolbar": "#e3eaf3"}},
-         "css": css}
-with open(os.path.join(OUT, "theme.json"), "w") as fh:
-    json.dump(theme, fh, indent=2)
-    fh.write("\n")
-print(f"{len(parade)} animals, {T}s loop, css {len(css)}/20000 chars")
-
-# Static gallery of every animal, for checking shapes
-cells = ""
-for i, (name, body, sc, *_r) in enumerate(parade):
-    x, y = 260 + (i % 4) * 400, 160 + (i // 4) * 260
-    fl = ",-1" if name in ("whale",) else ""
-    k = .55 if name == "whale" else 1
-    cells += f"<g transform='translate({x + (120 if name=='whale' else 0)},{y}) scale({k}{fl and ','+str(-k)})'>{body}</g><text x='{x-200}' y='{y+110}' fill='#888' font-size='18'>{name}</text>"
-gal = f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1300' style='background:#0d1016'><defs>{defs}</defs>{cells}</svg>"
-open(os.path.join(OUT, "preview", "gallery.svg"), "w").write(gal)
+gallery = gallery_svg(defs, cast, DARK["bg"], fit={"whale": (.55, 120, False)})
+write_theme(OUT, "deep-sea", "Deep Sea", svg, css, accent="#3b6cf6",
+            dark_chrome={"canvas": DARK["bg"], "sidebar": "#0a0b0d", "chrome": "#0a0b0d", "toolbar": "#0a0b0d"},
+            light_chrome={"canvas": LIGHT["bg"], "sidebar": "#e3eaf3", "chrome": "#e3eaf3", "toolbar": "#e3eaf3"},
+            schedule=schedule, loop=loop, gallery=gallery)

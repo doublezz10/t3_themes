@@ -1,0 +1,72 @@
+{
+ "id": "night-rain",
+ "loop_seconds": 458.5,
+ "has_light": true,
+ "schedule": [
+  {
+   "name": "leaf",
+   "start": 0.5,
+   "end": 22.5
+  },
+  {
+   "name": "paper boat",
+   "start": 36.5,
+   "end": 70.5
+  },
+  {
+   "name": "umbrella",
+   "start": 84.5,
+   "end": 114.5
+  },
+  {
+   "name": "gull",
+   "start": 128.5,
+   "end": 143.5
+  },
+  {
+   "name": "paper boat",
+   "start": 157.5,
+   "end": 191.5
+  },
+  {
+   "name": "gull",
+   "start": 205.5,
+   "end": 220.5
+  },
+  {
+   "name": "leaf",
+   "start": 234.5,
+   "end": 256.5
+  },
+  {
+   "name": "umbrella",
+   "start": 270.5,
+   "end": 300.5
+  },
+  {
+   "name": "gull",
+   "start": 314.5,
+   "end": 329.5
+  },
+  {
+   "name": "leaf",
+   "start": 343.5,
+   "end": 365.5
+  },
+  {
+   "name": "umbrella",
+   "start": 379.5,
+   "end": 409.5
+  },
+  {
+   "name": "paper boat",
+   "start": 423.5,
+   "end": 457.5
+  },
+  {
+   "name": "lightning",
+   "start": 17.8,
+   "end": 19.5
+  }
+ ]
+}

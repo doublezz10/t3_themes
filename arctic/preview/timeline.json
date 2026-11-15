@@ -1,0 +1,187 @@
+{
+ "id": "arctic",
+ "loop_seconds": 575.5,
+ "has_light": true,
+ "schedule": [
+  {
+   "name": "walrus",
+   "start": 0.5,
+   "end": 30.5
+  },
+  {
+   "name": "arctic tern",
+   "start": 26.5,
+   "end": 37.5
+  },
+  {
+   "name": "arctic fox",
+   "start": 33.5,
+   "end": 53.5
+  },
+  {
+   "name": "snow hare",
+   "start": 49.5,
+   "end": 65.5
+  },
+  {
+   "name": "beluga",
+   "start": 61.5,
+   "end": 83.5
+  },
+  {
+   "name": "polar bear",
+   "start": 79.5,
+   "end": 105.5
+  },
+  {
+   "name": "penguins",
+   "start": 101.5,
+   "end": 127.5
+  },
+  {
+   "name": "harp seal",
+   "start": 123.5,
+   "end": 141.5
+  },
+  {
+   "name": "puffin",
+   "start": 137.5,
+   "end": 150.5
+  },
+  {
+   "name": "orca",
+   "start": 146.5,
+   "end": 164.5
+  },
+  {
+   "name": "narwhal",
+   "start": 160.5,
+   "end": 182.5
+  },
+  {
+   "name": "snowy owl",
+   "start": 178.5,
+   "end": 194.5
+  },
+  {
+   "name": "beluga",
+   "start": 190.5,
+   "end": 212.5
+  },
+  {
+   "name": "puffin",
+   "start": 208.5,
+   "end": 221.5
+  },
+  {
+   "name": "narwhal",
+   "start": 217.5,
+   "end": 239.5
+  },
+  {
+   "name": "polar bear",
+   "start": 235.5,
+   "end": 261.5
+  },
+  {
+   "name": "arctic fox",
+   "start": 257.5,
+   "end": 277.5
+  },
+  {
+   "name": "harp seal",
+   "start": 273.5,
+   "end": 291.5
+  },
+  {
+   "name": "arctic tern",
+   "start": 287.5,
+   "end": 298.5
+  },
+  {
+   "name": "snow hare",
+   "start": 294.5,
+   "end": 310.5
+  },
+  {
+   "name": "penguins",
+   "start": 306.5,
+   "end": 332.5
+  },
+  {
+   "name": "orca",
+   "start": 328.5,
+   "end": 346.5
+  },
+  {
+   "name": "walrus",
+   "start": 342.5,
+   "end": 372.5
+  },
+  {
+   "name": "snowy owl",
+   "start": 368.5,
+   "end": 384.5
+  },
+  {
+   "name": "arctic tern",
+   "start": 380.5,
+   "end": 391.5
+  },
+  {
+   "name": "puffin",
+   "start": 387.5,
+   "end": 400.5
+  },
+  {
+   "name": "penguins",
+   "start": 396.5,
+   "end": 422.5
+  },
+  {
+   "name": "beluga",
+   "start": 418.5,
+   "end": 440.5
+  },
+  {
+   "name": "snowy owl",
+   "start": 436.5,
+   "end": 452.5
+  },
+  {
+   "name": "walrus",
+   "start": 448.5,
+   "end": 478.5
+  },
+  {
+   "name": "narwhal",
+   "start": 474.5,
+   "end": 496.5
+  },
+  {
+   "name": "orca",
+   "start": 492.5,
+   "end": 510.5
+  },
+  {
+   "name": "arctic fox",
+   "start": 506.5,
+   "end": 526.5
+  },
+  {
+   "name": "harp seal",
+   "start": 522.5,
+   "end": 540.5
+  },
+  {
+   "name": "snow hare",
+   "start": 536.5,
+   "end": 552.5
+  },
+  {
+   "name": "polar bear",
+   "start": 548.5,
+   "end": 574.5
+  }
+ ]
+}

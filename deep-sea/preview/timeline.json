@@ -1,0 +1,247 @@
+{
+ "id": "deep-sea",
+ "loop_seconds": 842.5,
+ "has_light": true,
+ "schedule": [
+  {
+   "name": "eel",
+   "start": 0.5,
+   "end": 23.5
+  },
+  {
+   "name": "octopus",
+   "start": 19.5,
+   "end": 37.5
+  },
+  {
+   "name": "shark",
+   "start": 33.5,
+   "end": 51.5
+  },
+  {
+   "name": "jellyfish",
+   "start": 47.5,
+   "end": 73.5
+  },
+  {
+   "name": "anglerfish",
+   "start": 69.5,
+   "end": 91.5
+  },
+  {
+   "name": "swordfish",
+   "start": 87.5,
+   "end": 99.5
+  },
+  {
+   "name": "whale",
+   "start": 95.5,
+   "end": 133.5
+  },
+  {
+   "name": "school",
+   "start": 129.5,
+   "end": 151.5
+  },
+  {
+   "name": "turtle",
+   "start": 147.5,
+   "end": 169.5
+  },
+  {
+   "name": "crab",
+   "start": 165.5,
+   "end": 187.5
+  },
+  {
+   "name": "dolphin",
+   "start": 183.5,
+   "end": 198.5
+  },
+  {
+   "name": "seahorse",
+   "start": 194.5,
+   "end": 218.5
+  },
+  {
+   "name": "hammerhead",
+   "start": 214.5,
+   "end": 232.5
+  },
+  {
+   "name": "ray",
+   "start": 228.5,
+   "end": 248.5
+  },
+  {
+   "name": "pufferfish",
+   "start": 244.5,
+   "end": 269.5
+  },
+  {
+   "name": "squid",
+   "start": 265.5,
+   "end": 283.5
+  },
+  {
+   "name": "turtle",
+   "start": 279.5,
+   "end": 301.5
+  },
+  {
+   "name": "crab",
+   "start": 297.5,
+   "end": 319.5
+  },
+  {
+   "name": "squid",
+   "start": 315.5,
+   "end": 333.5
+  },
+  {
+   "name": "pufferfish",
+   "start": 329.5,
+   "end": 354.5
+  },
+  {
+   "name": "swordfish",
+   "start": 350.5,
+   "end": 362.5
+  },
+  {
+   "name": "hammerhead",
+   "start": 358.5,
+   "end": 376.5
+  },
+  {
+   "name": "octopus",
+   "start": 372.5,
+   "end": 390.5
+  },
+  {
+   "name": "seahorse",
+   "start": 386.5,
+   "end": 410.5
+  },
+  {
+   "name": "whale",
+   "start": 406.5,
+   "end": 444.5
+  },
+  {
+   "name": "shark",
+   "start": 440.5,
+   "end": 458.5
+  },
+  {
+   "name": "eel",
+   "start": 454.5,
+   "end": 477.5
+  },
+  {
+   "name": "dolphin",
+   "start": 473.5,
+   "end": 488.5
+  },
+  {
+   "name": "ray",
+   "start": 484.5,
+   "end": 504.5
+  },
+  {
+   "name": "jellyfish",
+   "start": 500.5,
+   "end": 526.5
+  },
+  {
+   "name": "school",
+   "start": 522.5,
+   "end": 544.5
+  },
+  {
+   "name": "anglerfish",
+   "start": 540.5,
+   "end": 562.5
+  },
+  {
+   "name": "eel",
+   "start": 558.5,
+   "end": 581.5
+  },
+  {
+   "name": "whale",
+   "start": 577.5,
+   "end": 615.5
+  },
+  {
+   "name": "crab",
+   "start": 611.5,
+   "end": 633.5
+  },
+  {
+   "name": "ray",
+   "start": 629.5,
+   "end": 649.5
+  },
+  {
+   "name": "jellyfish",
+   "start": 645.5,
+   "end": 671.5
+  },
+  {
+   "name": "swordfish",
+   "start": 667.5,
+   "end": 679.5
+  },
+  {
+   "name": "dolphin",
+   "start": 675.5,
+   "end": 690.5
+  },
+  {
+   "name": "octopus",
+   "start": 686.5,
+   "end": 704.5
+  },
+  {
+   "name": "seahorse",
+   "start": 700.5,
+   "end": 724.5
+  },
+  {
+   "name": "pufferfish",
+   "start": 720.5,
+   "end": 745.5
+  },
+  {
+   "name": "anglerfish",
+   "start": 741.5,
+   "end": 763.5
+  },
+  {
+   "name": "hammerhead",
+   "start": 759.5,
+   "end": 777.5
+  },
+  {
+   "name": "turtle",
+   "start": 773.5,
+   "end": 795.5
+  },
+  {
+   "name": "squid",
+   "start": 791.5,
+   "end": 809.5
+  },
+  {
+   "name": "shark",
+   "start": 805.5,
+   "end": 823.5
+  },
+  {
+   "name": "school",
+   "start": 819.5,
+   "end": 841.5
+  }
+ ]
+}

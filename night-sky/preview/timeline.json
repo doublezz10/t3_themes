@@ -1,0 +1,131 @@
+{
+ "id": "night-sky",
+ "loop_seconds": 327.5,
+ "has_light": false,
+ "schedule": [
+  {
+   "name": "scorpius",
+   "start": 0.5,
+   "end": 26.5
+  },
+  {
+   "name": "cygnus",
+   "start": 15.5,
+   "end": 41.5
+  },
+  {
+   "name": "cassiopeia",
+   "start": 30.5,
+   "end": 56.5
+  },
+  {
+   "name": "big dipper",
+   "start": 45.5,
+   "end": 71.5
+  },
+  {
+   "name": "leo",
+   "start": 60.5,
+   "end": 86.5
+  },
+  {
+   "name": "orion",
+   "start": 75.5,
+   "end": 101.5
+  },
+  {
+   "name": "lyra",
+   "start": 90.5,
+   "end": 116.5
+  },
+  {
+   "name": "cygnus",
+   "start": 105.5,
+   "end": 131.5
+  },
+  {
+   "name": "orion",
+   "start": 120.5,
+   "end": 146.5
+  },
+  {
+   "name": "lyra",
+   "start": 135.5,
+   "end": 161.5
+  },
+  {
+   "name": "scorpius",
+   "start": 150.5,
+   "end": 176.5
+  },
+  {
+   "name": "cassiopeia",
+   "start": 165.5,
+   "end": 191.5
+  },
+  {
+   "name": "big dipper",
+   "start": 180.5,
+   "end": 206.5
+  },
+  {
+   "name": "leo",
+   "start": 195.5,
+   "end": 221.5
+  },
+  {
+   "name": "lyra",
+   "start": 210.5,
+   "end": 236.5
+  },
+  {
+   "name": "leo",
+   "start": 225.5,
+   "end": 251.5
+  },
+  {
+   "name": "orion",
+   "start": 240.5,
+   "end": 266.5
+  },
+  {
+   "name": "big dipper",
+   "start": 255.5,
+   "end": 281.5
+  },
+  {
+   "name": "cygnus",
+   "start": 270.5,
+   "end": 296.5
+  },
+  {
+   "name": "cassiopeia",
+   "start": 285.5,
+   "end": 311.5
+  },
+  {
+   "name": "scorpius",
+   "start": 300.5,
+   "end": 326.5
+  }
+ ],
+ "notes": {
+  "shooting_stars": [
+   9.0,
+   33.4,
+   72.5,
+   102.4,
+   135.3,
+   157.8,
+   196.5,
+   229.7,
+   269.0,
+   306.6
+  ],
+  "satellite": [
+   58.9,
+   216.2
+  ],
+  "comet": 137.5
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "bioluminescence",
+ "loop_seconds": 491.5,
+ "has_light": false,
+ "schedule": [
+  {
+   "name": "jellyfish swarm",
+   "start": 0.5,
+   "end": 28.5
+  },
+  {
+   "name": "vampire squid",
+   "start": 24.5,
+   "end": 48.5
+  },
+  {
+   "name": "sea fireflies",
+   "start": 44.5,
+   "end": 70.5
+  },
+  {
+   "name": "comb jelly",
+   "start": 66.5,
+   "end": 90.5
+  },
+  {
+   "name": "siphonophore",
+   "start": 86.5,
+   "end": 116.5
+  },
+  {
+   "name": "dragonfish",
+   "start": 112.5,
+   "end": 136.5
+  },
+  {
+   "name": "lanternfish",
+   "start": 132.5,
+   "end": 154.5
+  },
+  {
+   "name": "glowing squid",
+   "start": 150.5,
+   "end": 166.5
+  },
+  {
+   "name": "sea fireflies",
+   "start": 162.5,
+   "end": 188.5
+  },
+  {
+   "name": "vampire squid",
+   "start": 184.5,
+   "end": 208.5
+  },
+  {
+   "name": "dragonfish",
+   "start": 204.5,
+   "end": 228.5
+  },
+  {
+   "name": "comb jelly",
+   "start": 224.5,
+   "end": 248.5
+  },
+  {
+   "name": "glowing squid",
+   "start": 244.5,
+   "end": 260.5
+  },
+  {
+   "name": "jellyfish swarm",
+   "start": 256.5,
+   "end": 284.5
+  },
+  {
+   "name": "lanternfish",
+   "start": 280.5,
+   "end": 302.5
+  },
+  {
+   "name": "siphonophore",
+   "start": 298.5,
+   "end": 328.5
+  },
+  {
+   "name": "comb jelly",
+   "start": 324.5,
+   "end": 348.5
+  },
+  {
+   "name": "jellyfish swarm",
+   "start": 344.5,
+   "end": 372.5
+  },
+  {
+   "name": "siphonophore",
+   "start": 368.5,
+   "end": 398.5
+  },
+  {
+   "name": "dragonfish",
+   "start": 394.5,
+   "end": 418.5
+  },
+  {
+   "name": "lanternfish",
+   "start": 414.5,
+   "end": 436.5
+  },
+  {
+   "name": "sea fireflies",
+   "start": 432.5,
+   "end": 458.5
+  },
+  {
+   "name": "vampire squid",
+   "start": 454.5,
+   "end": 478.5
+  },
+  {
+   "name": "glowing squid",
+   "start": 474.5,
+   "end": 490.5
+  }
+ ]
+}

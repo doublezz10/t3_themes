@@ -1,0 +1,157 @@
+{
+ "id": "deep-space",
+ "loop_seconds": 659.5,
+ "has_light": false,
+ "schedule": [
+  {
+   "name": "space station",
+   "start": 0.5,
+   "end": 34.5
+  },
+  {
+   "name": "astronaut",
+   "start": 30.5,
+   "end": 56.5
+  },
+  {
+   "name": "comet",
+   "start": 52.5,
+   "end": 62.5
+  },
+  {
+   "name": "ufo",
+   "start": 58.5,
+   "end": 80.5
+  },
+  {
+   "name": "ringed planet",
+   "start": 76.5,
+   "end": 116.5
+  },
+  {
+   "name": "space whale",
+   "start": 112.5,
+   "end": 150.5
+  },
+  {
+   "name": "satellite",
+   "start": 146.5,
+   "end": 166.5
+  },
+  {
+   "name": "rocket",
+   "start": 162.5,
+   "end": 174.5
+  },
+  {
+   "name": "asteroids",
+   "start": 170.5,
+   "end": 196.5
+  },
+  {
+   "name": "moon",
+   "start": 192.5,
+   "end": 222.5
+  },
+  {
+   "name": "ringed planet",
+   "start": 218.5,
+   "end": 258.5
+  },
+  {
+   "name": "ufo",
+   "start": 254.5,
+   "end": 276.5
+  },
+  {
+   "name": "comet",
+   "start": 272.5,
+   "end": 282.5
+  },
+  {
+   "name": "space whale",
+   "start": 278.5,
+   "end": 316.5
+  },
+  {
+   "name": "space station",
+   "start": 312.5,
+   "end": 346.5
+  },
+  {
+   "name": "rocket",
+   "start": 342.5,
+   "end": 354.5
+  },
+  {
+   "name": "satellite",
+   "start": 350.5,
+   "end": 370.5
+  },
+  {
+   "name": "moon",
+   "start": 366.5,
+   "end": 396.5
+  },
+  {
+   "name": "asteroids",
+   "start": 392.5,
+   "end": 418.5
+  },
+  {
+   "name": "astronaut",
+   "start": 414.5,
+   "end": 440.5
+  },
+  {
+   "name": "space station",
+   "start": 436.5,
+   "end": 470.5
+  },
+  {
+   "name": "comet",
+   "start": 466.5,
+   "end": 476.5
+  },
+  {
+   "name": "moon",
+   "start": 472.5,
+   "end": 502.5
+  },
+  {
+   "name": "ringed planet",
+   "start": 498.5,
+   "end": 538.5
+  },
+  {
+   "name": "asteroids",
+   "start": 534.5,
+   "end": 560.5
+  },
+  {
+   "name": "rocket",
+   "start": 556.5,
+   "end": 568.5
+  },
+  {
+   "name": "ufo",
+   "start": 564.5,
+   "end": 586.5
+  },
+  {
+   "name": "space whale",
+   "start": 582.5,
+   "end": 620.5
+  },
+  {
+   "name": "astronaut",
+   "start": 616.5,
+   "end": 642.5
+  },
+  {
+   "name": "satellite",
+   "start": 638.5,
+   "end": 658.5
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "id": "aurora",
+ "loop_seconds": 497.9,
+ "has_light": false,
+ "schedule": [
+  {
+   "name": "satellite",
+   "start": 0.5,
+   "end": 46.5
+  },
+  {
+   "name": "shooting star",
+   "start": 68.5,
+   "end": 71.1
+  },
+  {
+   "name": "birds",
+   "start": 93.1,
+   "end": 127.1
+  },
+  {
+   "name": "shooting star 2",
+   "start": 149.1,
+   "end": 151.3
+  },
+  {
+   "name": "satellite",
+   "start": 173.3,
+   "end": 219.3
+  },
+  {
+   "name": "shooting star",
+   "start": 241.3,
+   "end": 243.9
+  },
+  {
+   "name": "shooting star 2",
+   "start": 265.9,
+   "end": 268.1
+  },
+  {
+   "name": "birds",
+   "start": 290.1,
+   "end": 324.1
+  },
+  {
+   "name": "shooting star 2",
+   "start": 346.1,
+   "end": 348.3
+  },
+  {
+   "name": "satellite",
+   "start": 370.3,
+   "end": 416.3
+  },
+  {
+   "name": "birds",
+   "start": 438.3,
+   "end": 472.3
+  },
+  {
+   "name": "shooting star",
+   "start": 494.3,
+   "end": 496.9
+  }
+ ]
+}
