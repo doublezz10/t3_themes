@@ -37,7 +37,7 @@ Once a thread has messages, the animals dim (to about 40% brightness in dark mod
 
 ![Conversation view](preview/conversation.gif)
 
-If your system's "Reduce motion" setting is on, the animation is replaced with a plain dark background.
+If your system's "Reduce motion" setting is on, the animation is replaced with a plain background (navy or sea-foam, depending on the mode).
 
 ## How it works
 
