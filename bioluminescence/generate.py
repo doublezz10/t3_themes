@@ -159,7 +159,7 @@ creatures, loop, schedule = parade(cast, rounds=3, seed=3)
 snow = specks(16, C2, seed=9, radii=(1, 1.3, 1.6), opacities=(.12, .2, .3), twinkle_every=5, drift=(-14, 18), drift_dur=80)
 svg = build_svg(defs, snow, creatures)
 
-DARK = {"bg": ABYSS, "glow": "rgba(43,196,196,.05)", "veil": "#05080d00", "veil_chat": "#05080dbb"}
+DARK = {"bg": ABYSS, "glow": "rgba(43,196,196,.05)", "veil": "#05080d00", "veil_chat": "#05080d90"}
 DARK.update(accent="#2bc4c4", sidebar="#04060a")
 css = build_css(svg, DARK)
 

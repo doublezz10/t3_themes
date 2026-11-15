@@ -119,7 +119,7 @@ stars = specks(44, W, seed=3, radii=(1.5, 2, 2.6), opacities=(.3, .45, .6, .8), 
 cyan_stars = specks(10, C, seed=9, radii=(1.8, 2.6), opacities=(.4, .6), twinkle_every=2, drift=None)
 svg = build_svg(defs, stars, cyan_stars, objects)
 
-DARK = {"bg": BG, "glow": "rgba(123,108,240,.10)", "veil": "#0b0a1400", "veil_chat": "#0b0a1499"}
+DARK = {"bg": BG, "glow": "rgba(123,108,240,.10)", "veil": "#0b0a1400", "veil_chat": "#0b0a1480"}
 DARK.update(accent="#7b6cf0", sidebar="#08070f")
 css = build_css(svg, DARK)
 

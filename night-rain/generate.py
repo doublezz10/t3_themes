@@ -47,9 +47,9 @@ def rain_layer(pid, n, length, color, width, gap, opacity, dur):
 
 
 rain_defs, rain = "", ""
-for args in (("rf", 90, 22, FAR, 2, 5, .55, 4.6),     # far: faint, small, slow
-             ("rm", 58, 34, MID, 2.4, 6, .7, 3.2),    # middle
-             ("rn", 32, 52, NEAR, 3, 7, .85, 2.3)):   # near: brighter, longer, faster
+for args in (("rf", 70, 22, FAR, 2, 5, .5, 10.4),    # far: faint, small, slow
+             ("rm", 44, 34, MID, 2.4, 6, .6, 7.4),    # middle
+             ("rn", 24, 52, NEAR, 3, 7, .7, 5.2)):    # near: brighter, longer, faster
     t, l = rain_layer(*args)
     rain_defs += t
     rain += l
@@ -119,7 +119,7 @@ schedule.append({"name": "lightning", "start": 17.8, "end": 19.5})
 
 svg = build_svg(defs, haze, rain, ripples, passers, glass, lightning)
 
-DARK = {"bg": "#0b0f14", "glow": "rgba(127,163,200,.06)", "veil": "#0b0f1400", "veil_chat": "#0b0f1499"}
+DARK = {"bg": "#0b0f14", "glow": "rgba(127,163,200,.06)", "veil": "#0b0f1400", "veil_chat": "#0b0f1480"}
 LIGHT = {"bg": "#e6ecf2", "glow": "rgba(79,107,138,.10)", "veil": "#e6ecf21a", "veil_chat": "#e6ecf2b8"}
 DARK.update(accent="#5b8cc4", sidebar="#080b0f")
 LIGHT.update(accent="#5b8cc4", sidebar="#dae2ea")

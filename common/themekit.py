@@ -463,7 +463,7 @@ def build_css(svg, dark, light=None):
     def vars_(p, lm=False):
         bg = p["bg"]
         return (f"--bg:{bg};--glow:{p.get('glow') or '#0000'};--veil:{p['veil']};--vc:{p['veil_chat']};"
-                f"--sb:{_alpha(p['sidebar'], .78 if lm else .64)};--hd:{_alpha(bg, .8)};--sc:{_alpha(bg, .75 if lm else .7)};"
+                f"--sb:{_alpha(p['sidebar'], .78 if lm else .5)};--hd:{_alpha(bg, .8)};--sc:{_alpha(bg, .75 if lm else .7)};"
                 f"--bu:{_alpha(mix(bg, ac, .12 if lm else .16), .8)};--po:{_alpha(mix(bg, '#ffffff' if lm else ac, .6 if lm else .07), .94)}")
 
     W = "[data-slot=sidebar-wrapper]"

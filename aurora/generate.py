@@ -260,7 +260,7 @@ stars = specks(26, STAR, seed=9, radii=(1, 1.3, 1.7), opacities=(.25, .4, .6, .8
 
 svg = build_svg(defs, stars, moving, sky, glow, horizon)
 
-DARK = {"bg": BG, "glow": "rgba(63,224,176,.05)", "veil": "#070b1200", "veil_chat": "#070b12a8"}
+DARK = {"bg": BG, "glow": "rgba(63,224,176,.05)", "veil": "#070b1200", "veil_chat": "#070b1270"}
 DARK.update(accent="#2fc79a", sidebar="#05080d")
 css = build_css(svg, DARK)
 write_theme(OUT, "aurora", "Aurora", svg, css, accent="#2fc79a",

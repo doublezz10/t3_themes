@@ -56,7 +56,7 @@ python3 night-rain/generate.py
 python3 common/preview.py night-rain      # optional: re-render the previews
 ```
 
-The CSS currently uses about 16,500 of T3's 20,000 characters, so there's room for another passer-by or two.
+The CSS currently uses about 15,900 of T3's 20,000 characters, so there's room for another passer-by or two.
 
 ## About the previews
 

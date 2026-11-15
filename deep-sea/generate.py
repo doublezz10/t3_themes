@@ -129,7 +129,7 @@ animals, loop, schedule = parade(cast, rounds=3, seed=11)
 plankton = specks(12, M, seed=7)
 svg = build_svg(defs, plankton, animals)
 
-DARK = {"bg": "#0d1016", "glow": "rgba(47,95,224,.07)", "veil": "#0d101600", "veil_chat": "#0d101699"}
+DARK = {"bg": "#0d1016", "glow": "rgba(47,95,224,.07)", "veil": "#0d101600", "veil_chat": "#0d101680"}
 LIGHT = {"bg": "#eef4fa", "glow": "rgba(47,95,224,.12)", "veil": "#eef4fa40", "veil_chat": "#eef4fac0"}
 DARK.update(accent="#3b6cf6", sidebar="#0a0b0d")
 LIGHT.update(accent="#3b6cf6", sidebar="#e3eaf3")

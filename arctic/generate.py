@@ -151,7 +151,7 @@ cast = [
 animals, loop, schedule = parade(cast, rounds=3, seed=23)
 svg = build_svg(defs, snow, animals)
 
-DARK = {"bg": "#0c1117", "glow": "rgba(111,168,220,.08)", "veil": "#0c111700", "veil_chat": "#0c111799"}
+DARK = {"bg": "#0c1117", "glow": "rgba(111,168,220,.08)", "veil": "#0c111700", "veil_chat": "#0c111780"}
 LIGHT = {"bg": "#eef4f8", "glow": "rgba(91,155,213,.14)", "veil": "#eef4f826", "veil_chat": "#eef4f8b8"}
 DARK.update(accent="#5b9bd5", sidebar="#090d12")
 LIGHT.update(accent="#5b9bd5", sidebar="#e2eaf1")
