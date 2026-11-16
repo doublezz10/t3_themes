@@ -1,6 +1,6 @@
 """Shared toolkit for animated T3 Code themes.
 
-T3 themes are CSS only: no JavaScript, no external files, at most 20,000
+T3 themes are CSS only: no JavaScript, no external files, at most 50,000
 characters. Every theme in this repo therefore draws its background as one
 animated SVG (SMIL), embedded in the CSS as a data: URL on the chat area.
 
@@ -21,7 +21,7 @@ import random
 import re
 import xml.dom.minidom
 
-CSS_LIMIT = 20000
+CSS_LIMIT = 50000
 VIEW_W, VIEW_H = 1600, 1000
 
 # ---------------------------------------------------------------------------
@@ -398,7 +398,7 @@ def _lum(c):
 def palette(canvas, accent, sidebar, dark=True):
     """A full set of T3 color roles tinted to match the scene, so message bubbles,
     menus, code blocks, inputs and the terminal all belong to the theme.
-    Roles cost nothing against the 20,000-character CSS limit."""
+    Roles cost nothing against the CSS size limit."""
     ink = "#ffffff" if dark else "#0b1220"
     lift = (lambda t: mix(canvas, mix("#ffffff", accent, .25), t)) if dark else (lambda t: mix(canvas, "#ffffff", t * 4))
     on_accent = "#06101a" if _lum(accent) > .45 else "#ffffff"
@@ -438,7 +438,7 @@ def _alpha(c, a):
 # ---------------------------------------------------------------------------
 
 
-def build_css(svg, dark, light=None):
+def build_css(svg, dark, light=None, critter=None):
     """Theme CSS. The animated scene fills the whole window, behind a see-through
     sidebar, and the chat area adds a veil once a thread has messages.
 
@@ -448,7 +448,9 @@ def build_css(svg, dark, light=None):
         veil       color over the chat area on the empty new-thread page (alpha hex)
         veil_chat  stronger veil once a thread has messages, so text stays readable
         accent     theme accent (tints bubbles, the current thread, menus)
-        sidebar    sidebar color; drawn at ~64% (78% in light mode) so the scene shows through
+        sidebar    sidebar color; drawn at ~50% (78% in light mode) so the scene shows through
+        sheen      optional list of 2-4 theme colors for gradients (send button, code-block line, switches)
+    critter: an optional critters.Critter that keeps you company on the composer.
     Without `light`, everything applies in dark mode only.
 
     The whole-window layout relies on T3's sidebar wrapper markup (the approach
@@ -458,13 +460,16 @@ def build_css(svg, dark, light=None):
     P = "" if light else ".dark "
     R = ":root" if light else ".dark"
     ac = dark["accent"]
+    sheen = dark.get("sheen") or [ac, mix(ac, "#ffffff", .35)]  # theme colors for gradients
     t = lambda a: _alpha(ac, a)  # noqa: E731  accent at alpha a
 
     def vars_(p, lm=False):
         bg = p["bg"]
         return (f"--bg:{bg};--glow:{p.get('glow') or '#0000'};--veil:{p['veil']};--vc:{p['veil_chat']};"
                 f"--sb:{_alpha(p['sidebar'], .78 if lm else .5)};--hd:{_alpha(bg, .8)};--sc:{_alpha(bg, .75 if lm else .7)};"
-                f"--bu:{_alpha(mix(bg, ac, .12 if lm else .16), .8)};--po:{_alpha(mix(bg, '#ffffff' if lm else ac, .6 if lm else .07), .94)}")
+                f"--bu:{_alpha(mix(bg, ac, .12 if lm else .16), .8)};--po:{_alpha(mix(bg, '#ffffff' if lm else ac, .6 if lm else .07), .86)};"
+                f"--rc:{_alpha(bg, .86 if lm else .74)};--cp:{_alpha(mix(bg, '#ffffff' if lm else ac, .5 if lm else .06), .8)};"
+                f"--ds:{'#0f172a26' if lm else '#000000a6'}")
 
     W = "[data-slot=sidebar-wrapper]"
     C = "[data-workspace-area=conversation]"
@@ -489,12 +494,45 @@ def build_css(svg, dark, light=None):
         f'{P}{C} :is(.messages-timeline-scroll,[data-chat-composer-form]){{background:#0000!important}}'
         # new-thread page: a soft dark pool behind the composer and its heading
         f'{P}{C}:not({H}) [data-slot=composer-host]{{box-shadow:0 -60px 150px 70px var(--sc)}}'
-        # small touches in the accent color
-        f'{P}[data-user-message-bubble]{{background:linear-gradient(90deg,{t(.26)},{t(.06)}),var(--bu)!important;box-shadow:var(--sh)!important}}'
+            # reading card: a rounded scrim behind each block of chat text, so the
+        # scene can show at full strength around it (idea from Starry Ridge)
+        f'{P}{C}{H} [data-timeline-root]{{background:var(--rc);background-clip:padding-box;border-block:.2rem solid #0000;'
+        f'border-radius:1rem;padding:.35rem .85rem}}'
+        f'{P}{C}{H} [data-timeline-root]:has([data-message-role]){{padding-block:.65rem}}'
+        f'{P}{C}{H} [data-timeline-root]:has([data-timeline-row-kind]:empty){{padding:0;border:0;background:none}}'
+        f'{P}{C}{H} [data-timeline-root]:has([data-message-role=user]){{background:none;padding-inline:0}}'
+        # frosted glass over the moving scene
+        f'{P}[data-slot=sidebar-inner]{{backdrop-filter:blur(var(--glass-blur,10px)) saturate(1.25)}}'
+        f'{hw}[data-chat-header]{{backdrop-filter:blur(12px) saturate(1.25)}}'
+        # composer: glass card with an accent glow that brightens while you type
+        f'{P}[data-slot=composer-host]{{background:var(--cp)!important;backdrop-filter:blur(16px) saturate(1.3);'
+        f'border-color:{t(.2)}!important;box-shadow:0 14px 34px -14px {t(.45)},0 10px 28px -8px var(--ds),inset 0 1px 0 #ffffff12!important;'
+        f'transition:box-shadow .4s,border-color .4s}}'
+        f'{P}[data-slot=composer-host]:focus-within{{border-color:{t(.45)}!important;'
+        f'box-shadow:0 0 0 1px {t(.22)},0 16px 44px -12px {t(.6)},0 10px 28px -8px var(--ds),inset 0 1px 0 #ffffff18!important}}'
+        f'{P}.composer-tiptap{{caret-color:{sheen[1]}}}'
+        f'{P}[data-chat-composer-form] button[class~=bg-message-action]:not(:disabled){{'
+        f'background:radial-gradient(100% 60% at 50% 0%,#ffffff2e,#0000 70%),linear-gradient(150deg,{sheen[0]},{sheen[1]})!important;'
+        f'box-shadow:inset 0 1px 0 #ffffff38,0 0 14px -3px {t(.7)}!important}}'
+        # accent touches: bubbles, current thread, menus, dialogs, tooltips
+        f'{P}[data-user-message-bubble]{{background:linear-gradient(90deg,{t(.26)},{t(.06)}),var(--bu)!important;box-shadow:var(--sh),0 10px 22px -10px {t(.4)}!important}}'
         f'{P}[data-thread-item] [aria-current=page]{{background:linear-gradient(90deg,{t(.32)},{t(.08)} 60%,#0000)!important;box-shadow:var(--sh)!important}}'
-        f'{P}:is([data-slot=popover-popup],[data-slot=menu-popup]){{background:linear-gradient(160deg,{t(.14)},#0000 45%),var(--po)!important;border-color:{t(.18)}!important}}'
+        f'{P}:is([data-slot=popover-popup],[data-slot=menu-popup],[data-slot=dialog-popup],[data-slot=tooltip-popup]){{'
+        f'background:linear-gradient(160deg,{t(.14)},#0000 45%),var(--po)!important;border-color:{t(.18)}!important;'
+        f'backdrop-filter:blur(18px) saturate(1.3);box-shadow:inset 0 1px 0 #ffffff0f,0 24px 60px -20px var(--ds)!important}}'
+        f'{P}[data-thread-details-card]{{background-image:linear-gradient(135deg,{t(.14)},#0000 60%)!important;border-color:{t(.14)}!important}}'
+        f'{P}[data-slot=switch][data-checked]{{background:linear-gradient(90deg,{sheen[0]},{sheen[1]})!important}}'
+        # code blocks get a thin line of the theme's colors along the top
+        f'{P}.chat-markdown-codeblock{{position:relative}}'
+        f'{P}.chat-markdown-codeblock::before{{content:"";position:absolute;inset:0 0 auto;height:1px;z-index:2;pointer-events:none;'
+        f'background:linear-gradient(90deg,#0000,{",".join(sheen)},#0000)}}'
+        f'{P}::selection{{background:{t(.38)}}}'
+        f'{P}::-webkit-scrollbar-thumb{{background:{t(.28)};border-radius:99px}}'
+        f'{P}[data-slot=scroll-area-thumb]{{background:{t(.32)}!important}}'
         f'@media (prefers-reduced-motion:reduce){{{R}{{--sea:none!important}}}}'
     )
+    if critter:
+        css += critter.css(P)
     return css
 
 

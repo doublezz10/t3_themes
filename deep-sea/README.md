@@ -45,7 +45,7 @@ T3 themes can't run JavaScript or load files, so the whole background is one ani
 
 - Every animal shares one 14-minute timeline built by `parade()` in [`../common/themekit.py`](../common/themekit.py). It plays three rounds, each shuffled, and gives each pass its own route: a new lane, bent into random swoops, dips or S-curves (the crab keeps to the sea floor). An animal's motion path is all of its routes joined by move-tos; `keyTimes`/`keyPoints` keep it parked off-screen except during its own windows, which is how the animals take turns.
 - The dot-matrix look comes from two SVG `<pattern>` fills (a 3×3 tile of dots in four shades of blue), so each silhouette is just a path filled with dots. Tails and tentacles are dotted strokes (`stroke-dasharray="0 5"` with round caps).
-- Dimming in conversations uses `:has([data-timeline-row-kind])` to switch a translucent veil on top of the background.
+- In conversations, `:has([data-timeline-row-kind])` switches on a light veil, and each `[data-timeline-root]` row gets a dark rounded reading card behind its text.
 - Both appearances share one embedded SVG. Light mode (`:root:not(.dark)`) only swaps CSS variables for the water color, glow and veil, which keeps the CSS under T3's size limit. The colors for each mode are the `DARK` and `LIGHT` dictionaries in `generate.py`.
 
 ## About the previews
@@ -60,7 +60,7 @@ All the shapes, paths, timings and colors live in `generate.py`. After changing 
 python3 generate.py
 ```
 
-This rewrites `background.svg`, `theme.css`, `theme.json`, `preview/gallery.svg` and `preview/timeline.json`. To refresh the screenshots and GIFs afterwards, run `python3 ../common/preview.py .` from this folder (needs Chrome and ffmpeg). The script checks that the SVG is valid XML (one bad attribute blanks the whole background) and that the CSS stays under T3's 20,000-character limit. It currently uses about 19,900, so there's no room for another animal without trimming something first.
+This rewrites `background.svg`, `theme.css`, `theme.json`, `preview/gallery.svg` and `preview/timeline.json`. To refresh the screenshots and GIFs afterwards, run `python3 ../common/preview.py .` from this folder (needs Chrome and ffmpeg). The script checks that the SVG is valid XML (one bad attribute blanks the whole background) and that the CSS stays under T3's 50,000-character limit. It currently uses about 22,400.
 
 To add an animal, define its body facing +x with its head near the origin, then add an `Actor` to the `cast` list:
 

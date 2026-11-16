@@ -54,4 +54,4 @@ python3 generate.py
 python3 ../common/preview.py .   # optional: refresh the screenshots and GIFs
 ```
 
-The CSS is at about 18,800 of T3's 20,000-character limit, so there's room for one more constellation before something needs trimming. Fewer twinkling stars, or a smaller star tile, would free up space.
+The CSS is at about 21,300 of T3's 50,000-character limit, so there's room for more constellations.

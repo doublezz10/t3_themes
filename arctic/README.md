@@ -61,6 +61,6 @@ python3 arctic/generate.py
 python3 common/preview.py arctic --still 155.5 --clip penguins:108:14 --clip orca:149:12 --clip owl:180:12
 ```
 
-The first command rewrites `background.svg`, `theme.css`, `theme.json`, `preview/gallery.svg` and `preview/timeline.json`, and checks the SVG is valid and the CSS stays under T3's 20,000-character limit. It currently uses about 17,500. The second re-renders the previews; `preview/timeline.json` lists when each animal crosses, for picking clip times.
+The first command rewrites `background.svg`, `theme.css`, `theme.json`, `preview/gallery.svg` and `preview/timeline.json`, and checks the SVG is valid and the CSS stays under T3's 50,000-character limit. It currently uses about 19,900. The second re-renders the previews; `preview/timeline.json` lists when each animal crosses, for picking clip times.
 
 To add an animal, draw its body facing +x with its head near the origin and add an `Actor` to the `cast` list. Use `flip=True` for side-view animals that travel right to left, and `rotate=False` plus `face_left()` for upright walkers heading left.

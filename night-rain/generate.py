@@ -17,6 +17,7 @@ import random
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "common"))
+import critters  # noqa: E402
 from themekit import (Actor, VIEW_H, VIEW_W, build_css, build_svg, dot_pattern, dotted,  # noqa: E402
                       gallery_svg, parade, spin, wave, write_theme)
 
@@ -119,11 +120,11 @@ schedule.append({"name": "lightning", "start": 17.8, "end": 19.5})
 
 svg = build_svg(defs, haze, rain, ripples, passers, glass, lightning)
 
-DARK = {"bg": "#0b0f14", "glow": "rgba(127,163,200,.06)", "veil": "#0b0f1400", "veil_chat": "#0b0f1480"}
-LIGHT = {"bg": "#e6ecf2", "glow": "rgba(79,107,138,.10)", "veil": "#e6ecf21a", "veil_chat": "#e6ecf2b8"}
-DARK.update(accent="#5b8cc4", sidebar="#080b0f")
+DARK = {"bg": "#0b0f14", "glow": "rgba(127,163,200,.06)", "veil": "#0b0f1400", "veil_chat": "#0b0f1428"}
+LIGHT = {"bg": "#e6ecf2", "glow": "rgba(79,107,138,.10)", "veil": "#e6ecf21a", "veil_chat": "#e6ecf260"}
+DARK.update(accent="#5b8cc4", sidebar="#080b0f", sheen=["#5b8cc4", "#86aad0", "#b9d4ee"])
 LIGHT.update(accent="#5b8cc4", sidebar="#dae2ea")
-css = build_css(svg, DARK, LIGHT)
+css = build_css(svg, DARK, LIGHT, critter=critters.DUCK)
 
 gallery = gallery_svg(defs, cast, DARK["bg"], cols=4, fit={a.name: (a.scale * 1.4, -40, False) for a in cast})
 write_theme(OUT, "night-rain", "Night Rain", svg, css, accent="#5b8cc4",

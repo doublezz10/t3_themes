@@ -15,6 +15,7 @@ import random
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "common"))
+import critters  # noqa: E402
 from themekit import (Actor, blink, build_css, build_svg, dot_pattern, gallery_svg, parade, pulse, specks,  # noqa: E402
                       spin, wave, write_theme)
 
@@ -129,11 +130,11 @@ animals, loop, schedule = parade(cast, rounds=3, seed=11)
 plankton = specks(12, M, seed=7)
 svg = build_svg(defs, plankton, animals)
 
-DARK = {"bg": "#0d1016", "glow": "rgba(47,95,224,.07)", "veil": "#0d101600", "veil_chat": "#0d101680"}
-LIGHT = {"bg": "#eef4fa", "glow": "rgba(47,95,224,.12)", "veil": "#eef4fa40", "veil_chat": "#eef4fac0"}
-DARK.update(accent="#3b6cf6", sidebar="#0a0b0d")
+DARK = {"bg": "#0d1016", "glow": "rgba(47,95,224,.07)", "veil": "#0d101600", "veil_chat": "#0d101628"}
+LIGHT = {"bg": "#eef4fa", "glow": "rgba(47,95,224,.12)", "veil": "#eef4fa40", "veil_chat": "#eef4fa60"}
+DARK.update(accent="#3b6cf6", sidebar="#0a0b0d", sheen=["#2f5fe0", "#4a7bf0", "#8fb0ff"])
 LIGHT.update(accent="#3b6cf6", sidebar="#e3eaf3")
-css = build_css(svg, DARK, LIGHT)
+css = build_css(svg, DARK, LIGHT, critter=critters.FISH)
 
 gallery = gallery_svg(defs, cast, DARK["bg"], fit={"whale": (.55, 120, False)})
 write_theme(OUT, "deep-sea", "Deep Sea", svg, css, accent="#3b6cf6",

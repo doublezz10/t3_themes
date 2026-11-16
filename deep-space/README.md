@@ -66,6 +66,6 @@ All shapes, paths, timings and colors live in `generate.py`. After changing it, 
 python3 generate.py
 ```
 
-This rewrites `background.svg`, `theme.css`, `theme.json`, `preview/gallery.svg` and `preview/timeline.json`. The toolkit checks that the SVG is valid XML and that the CSS stays under T3's 20,000-character limit. Deep Space currently uses about 17,500.
+This rewrites `background.svg`, `theme.css`, `theme.json`, `preview/gallery.svg` and `preview/timeline.json`. The toolkit checks that the SVG is valid XML and that the CSS stays under T3's 50,000-character limit. Deep Space currently uses about 20,100.
 
 To add an object, define its body facing +x with its front near the origin, then add an `Actor(...)` to the `cast` list. Use `rotate=False` for things that should keep their orientation (planets, the UFO), and `flip=True` for side-view bodies that travel right to left.

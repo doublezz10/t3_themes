@@ -38,14 +38,23 @@ PALETTES = {
                   box="rgba(255,255,255,.92)", boxb="#d3dbe6", line="#d7dfe9", border="#d7dfe9"),
 }
 
-MESSAGES = """<div data-timeline-row-kind=message><div class=row><div class=ub data-user-message-bubble>Can you add a jitter plot of the per-mouse firing rates to Fig. 3b, matching the existing palette?</div></div>
-<div class=as><p>Done. I added a strip plot of per-mouse means on top of the bars in <code>fig3.py</code>, using the same two-tone palette, and ran the figure checker.</p>
-<pre>ax.scatter(x + jitter, rates, s=9, color=PALETTE["key"],
+def _row(role, inner):
+    # mirrors T3's markup: one [data-timeline-root] lane per timeline row
+    return (f"<div data-timeline-root><div data-timeline-row-kind=message data-message-role={role}>{inner}</div></div>")
+
+
+MESSAGES = "".join((
+    _row("user", "<div class=row><div class=ub data-user-message-bubble>Can you add a jitter plot of the per-mouse firing rates "
+                 "to Fig. 3b, matching the existing palette?</div></div>"),
+    _row("assistant", """<div class="as chat-markdown"><p>Done. I added a strip plot of per-mouse means on top of the bars in <code>fig3.py</code>, using the same two-tone palette, and ran the figure checker.</p>
+<div class=chat-markdown-codeblock><pre>ax.scatter(x + jitter, rates, s=9, color=PALETTE["key"],
            alpha=.8, linewidths=0, zorder=3)
-pubfig.finalize_figure(fig, "fig3b.pdf")</pre>
-<p>The checker passed with no warnings. Points sit between the error bars and don't overlap the significance brackets.</p></div>
-<div class=row><div class=ub data-user-message-bubble>Nice, can you make the dots a bit bigger?</div></div>
-<div class=as><p>Bumped the marker size from 9 to 14 and re-exported. Updated figure is at <code>figures/fig3b.pdf</code>.</p></div></div>"""
+pubfig.finalize_figure(fig, "fig3b.pdf")</pre></div>
+<p>The checker passed with no warnings. Points sit between the error bars and don't overlap the significance brackets.</p></div>"""),
+    _row("user", "<div class=row><div class=ub data-user-message-bubble>Nice, can you make the dots a bit bigger?</div></div>"),
+    _row("assistant", "<div class='as chat-markdown'><p>Bumped the marker size from 9 to 14 and re-exported. Updated figure is at "
+                      "<code>figures/fig3b.pdf</code>.</p></div>"),
+))
 
 
 def mock_html(css, theme, mode, view):
@@ -60,7 +69,13 @@ def mock_html(css, theme, mode, view):
     if "surfaceOverlay" in roles:
         c["box"] = roles["surfaceOverlay"] + "eb"
     conv = view == "conversation"
-    composer = "<div class=box data-slot=composer-host>Ask anything, / for commands, @ for context</div>"
+    # mirrors T3's editor markup so the typing companion lands where it would in the app:
+    # the conversation view has a focused draft (critter awake), the home view an empty one (asleep)
+    draft = "<p>Make the dots a bit bigger</p>" if view == "conversation" else "<p><br></p>"
+    ph = "" if view == "conversation" else "<div class=ph>Ask anything, / for commands, @ for context</div>"
+    composer = ("<form data-chat-composer-form><div class=box data-slot=composer-host><div class=ed><div>"
+                f"<div class=composer-tiptap contenteditable {'autofocus' if view == 'conversation' else ''}>{draft}</div></div>{ph}</div>"
+                "<button type=button class='send bg-message-action'>&#8593;</button></div></form>")
     body = (f"<div class=hdr data-chat-header>Fig 3b jitter plot</div><div class=feed>{MESSAGES}</div><div class='comp bot'>{composer}</div>" if conv else
             f"<div class=comp>{composer}<div class=bar><span>Full access</span><span>project</span><span>main</span><b>Opus 5.5</b></div></div>")
     threads = ('<div data-thread-item><div class="th a" aria-current=page>Fig 3b jitter plot</div></div><div class=th>Theme ideas</div>' if conv
@@ -75,10 +90,12 @@ def mock_html(css, theme, mode, view):
 .hdr{{height:44px;border-bottom:1px solid {c['line']};padding:13px 18px;color:{c['hdr']};font-weight:500}}
 .feed{{max-width:680px;margin:0 auto;padding:22px 20px;font-size:14px;line-height:1.6}}
 .row{{display:flex;justify-content:flex-end;margin:6px 0 18px}} .ub{{background:{c['bub']};border:1px solid {c['bubb']};border-radius:14px;padding:9px 14px;max-width:75%;color:{c['hdr']}}}
-.as{{margin-bottom:18px}} .as p{{margin:0 0 10px}} code{{font:12.5px ui-monospace,Menlo,monospace;background:{c['inl']};padding:1px 5px;border-radius:5px;color:{c['codet']}}}
-pre{{font:12.5px/1.5 ui-monospace,Menlo,monospace;background:{c['code']};border:1px solid {c['codeb']};border-radius:10px;padding:12px 14px;margin:0 0 10px;color:{c['codet']}}}
+.as{{margin-bottom:4px}} [data-timeline-root]{{margin-bottom:10px}} .as p{{margin:0 0 10px}} .chat-markdown-codeblock{{margin:0 0 10px;border-radius:10px}} code{{font:12.5px ui-monospace,Menlo,monospace;background:{c['inl']};padding:1px 5px;border-radius:5px;color:{c['codet']}}}
+pre{{font:12.5px/1.5 ui-monospace,Menlo,monospace;background:{c['code']};border:1px solid {c['codeb']};border-radius:10px;padding:12px 14px;margin:0;color:{c['codet']}}}
 .comp{{position:absolute;left:50%;top:44%;transform:translateX(-50%);width:520px}} .comp.bot{{top:auto;bottom:18px;width:640px}}
-.box{{background:{c['box']};border:1px solid {c['boxb']};border-radius:12px;padding:12px 14px 36px;color:{c['mut']}}}
+.send{{position:absolute;right:10px;bottom:8px;width:26px;height:26px;border-radius:50%;border:0;background:{c['mut']};color:#fff;font-size:14px}}
+.ed{{position:relative}} .ph{{position:absolute;inset:0;pointer-events:none}} .composer-tiptap{{position:relative;outline:none;color:{c['hdr']};caret-color:transparent}} .composer-tiptap p{{margin:0}}
+.box{{position:relative;background:{c['box']};border:1px solid {c['boxb']};border-radius:12px;padding:12px 14px 36px;color:{c['mut']}}}
 .bar{{margin:0 10px;background:{c['box']};border:1px solid {c['boxb']};border-top:0;border-radius:0 0 10px 10px;padding:7px 12px;color:{c['mut']};font-size:12px;display:flex;gap:16px}} .bar b{{margin-left:auto;font-weight:500}}
 {css}</style></head><body><div class=win data-slot=sidebar-wrapper>
 <div class=side data-slot=sidebar-inner><div class=dots style="padding:2px 6px 14px"><span style=background:#ff5f57></span><span style=background:#febc2e></span><span style=background:#28c840></span></div>

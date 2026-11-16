@@ -6,8 +6,10 @@ Every theme:
 
 - draws a slowly animated, dot-matrix scene behind the whole window, with the sidebar see-through over it;
 - recolors the rest of T3 to match (about 35 color roles: message bubbles, buttons, menus, inputs, code blocks, the terminal);
-- tints your messages, the current thread and menus in the theme's accent;
-- keeps text readable: a soft dark patch sits behind the composer on the new-thread page, and the scene dims once a thread has messages;
+- tints your messages, the current thread, menus, dialogs, switches and scrollbars in the theme's colors, with a glowing composer, a gradient send button and a thin line of theme colors along the top of code blocks;
+- frosts the sidebar, header, composer and menus like glass over the moving scene;
+- has a small dot-matrix companion that naps on the composer's top edge and wakes up and follows the end of your text while you type (see below);
+- keeps text readable: each block of chat sits on its own dark, rounded reading card, so the scene stays at full strength around the text, and a soft dark patch sits behind the composer on the new-thread page;
 - falls back to a plain background when "Reduce motion" is on.
 
 | Theme | Preview |
@@ -32,7 +34,7 @@ T3 Code themes are applied through its built-in theme tool, so the easiest way i
 
 1. Download `https://raw.githubusercontent.com/doublezz10/t3_themes/main/<theme>/theme.json`, for example `aurora/theme.json`.
 2. Call the `t3_theme_set` tool with `themeId` set to the folder name (such as `aurora`) and the file's JSON, unchanged, as `theme`.
-3. Don't edit the file. Several themes are close to T3's 20,000-character CSS limit.
+3. Don't edit the file.
 
 Themes apply to the desktop and web apps. The T3 mobile app does not use custom themes.
 
@@ -57,6 +59,22 @@ python3 deep-sea/generate.py
 python3 common/preview.py deep-sea      # needs Google Chrome and ffmpeg
 ```
 
+## Typing companions
+
+| Theme | Companion |
+| --- | --- |
+| Aurora | an arctic fox with a glowing tail tip |
+| Arctic | a waddling penguin |
+| Deep Sea | a little fish that blows bubbles |
+| Bioluminescence | a glowing jellyfish |
+| Night Rain | a duck in a rain hat, dripping |
+| Night Sky | an owl |
+| Deep Space | a floating astronaut |
+
+![Companions, asleep and awake](common/critters.png)
+
+The companion is the `::after` of the composer's last paragraph, positioned absolutely but without a `left`, so it keeps the horizontal spot where the text ends (the trick the Koi Pond and Biscuit skins on [t3skins.dev](https://www.t3skins.dev) use). It sleeps while the composer isn't focused. Blinks, bubbles and other small motions are CSS animations inside its SVG, and stop when "Reduce motion" is on. The cast lives in `common/critters.py`.
+
 ## How the animation stays unpredictable
 
 Themes can't run code, so there's no true randomness. Instead, `themekit.parade()` bakes several rounds into one long loop. Each round plays the cast in a freshly shuffled order, and every pass takes its own route: a different lane across the screen, bent into its own random swoops, dips, climbs and S-curves. Deep Sea's loop, for example, is 14 minutes long before anything repeats. Walkers on the ground and shooting stars opt out with `wander=0` and keep straight paths.
@@ -65,15 +83,15 @@ Looping effects that aren't part of a parade (Aurora's curtains, for example) us
 
 ## Limits worth knowing
 
-- A theme's custom CSS can be at most 20,000 characters. `themekit.write_theme()` refuses to write a theme that's over.
-- CSS cannot load files, so the background is an animated SVG embedded as a `data:` URL. Only `%` and `#` are escaped in it; leaving `<` and `>` raw saves about 6 characters per tag.
+- A theme's custom CSS can be at most 50,000 characters (it was 20,000 in earlier T3 builds; all themes here are around 18,000 to 22,500). `themekit.write_theme()` refuses to write a theme that's over.
+- CSS cannot load files, so the background is an animated SVG embedded as a `data:` URL. Only `%` and `#` are escaped in it; leaving `<` and `>` raw saves about 6 characters per tag. The one exception is `</style>` (the companions' SVGs carry a small stylesheet): left raw, it would close the `<style>` element the theme CSS sits in, so its `<` is escaped.
 - One XML error in that SVG blanks the whole background, so `themekit.build_svg()` validates it.
 - T3 documents a set of stable selectors (such as `[data-workspace-area="conversation"]`); other class names change between releases. The whole-window layout also relies on T3's sidebar markup (`[data-slot=sidebar-wrapper]` and a few others), which isn't on that list. If an update renames it, the scene falls back to filling the chat area alone, and nothing breaks.
 - The previews are rendered in a T3-style window mockup, not captured from the app itself.
 
 ## Credits
 
-The whole-window layout, the full matching palette and the accent touches were inspired by [Nyx](https://github.com/Deepusleepy/t3-nyx-theme) (MIT), a still night-sky theme for T3 Code.
+The whole-window layout, the full matching palette and the accent touches were inspired by [Nyx](https://github.com/Deepusleepy/t3-nyx-theme) (MIT), a still night-sky theme for T3 Code. The reading cards, the glowing composer and the code-block line came from studying the skins on [t3skins.dev](https://www.t3skins.dev), especially Starry Ridge.
 
 ## License
 

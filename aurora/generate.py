@@ -19,6 +19,7 @@ import random
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "common"))
+import critters  # noqa: E402
 from themekit import Actor, blink, build_css, build_svg, dot_pattern, parade, specks, write_theme  # noqa: E402
 
 OUT = os.path.dirname(os.path.abspath(__file__))
@@ -260,9 +261,9 @@ stars = specks(26, STAR, seed=9, radii=(1, 1.3, 1.7), opacities=(.25, .4, .6, .8
 
 svg = build_svg(defs, stars, moving, sky, glow, horizon)
 
-DARK = {"bg": BG, "glow": "rgba(63,224,176,.05)", "veil": "#070b1200", "veil_chat": "#070b1270"}
-DARK.update(accent="#2fc79a", sidebar="#05080d")
-css = build_css(svg, DARK)
+DARK = {"bg": BG, "glow": "rgba(63,224,176,.05)", "veil": "#070b1200", "veil_chat": "#070b1228"}
+DARK.update(accent="#2fc79a", sidebar="#05080d", sheen=[GREEN_LO, GREEN, BLUE, VIOLET])
+css = build_css(svg, DARK, critter=critters.FOX)
 write_theme(OUT, "aurora", "Aurora", svg, css, accent="#2fc79a",
             dark_chrome={"canvas": BG, "sidebar": "#05080d", "chrome": "#05080d", "toolbar": "#05080d"},
             schedule=schedule, loop=loop)

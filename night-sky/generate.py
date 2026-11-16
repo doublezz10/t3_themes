@@ -15,6 +15,7 @@ import random
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "common"))
+import critters  # noqa: E402
 from themekit import blink, build_css, build_svg, gallery_svg, shift_path, specks, write_theme  # noqa: E402
 
 OUT = os.path.dirname(os.path.abspath(__file__))
@@ -216,9 +217,9 @@ sky = ("<g><animateTransform attributeName='transform' type='translate' dur='240
        + "</g>")
 
 svg = build_svg(defs, sky, sky_figures, movers)
-DARK = {"bg": BG, "glow": "rgba(110,130,255,.06)", "veil": "#0a0d1800", "veil_chat": "#0a0d1880"}
-DARK.update(accent="#7aa8ff", sidebar="#080a12")
-css = build_css(svg, DARK)
+DARK = {"bg": BG, "glow": "rgba(110,130,255,.06)", "veil": "#0a0d1800", "veil_chat": "#0a0d1828"}
+DARK.update(accent="#7aa8ff", sidebar="#080a12", sheen=["#7aa8ff", "#8fe3ff", "#c9b8ff"])
+css = build_css(svg, DARK, critter=critters.OWL)
 
 
 class Figure:  # minimal stand-in for Actor in the gallery

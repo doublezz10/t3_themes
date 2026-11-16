@@ -35,7 +35,7 @@ Faint particles of marine snow drift through the dark between them.
 
 ## Inside a conversation
 
-Glowing creatures are bright, so once a thread has messages a strong veil (about 73%) dims them well below the text. The empty new-thread page shows them at full strength.
+Once a thread has messages, each block of chat sits on its own dark reading card, so the glowing creatures stay bright around the text without competing with it.
 
 ![Conversation view](preview/conversation.gif)
 
@@ -62,4 +62,4 @@ python3 generate.py
 python3 ../common/preview.py .   # optional: refresh the screenshots and GIFs
 ```
 
-This rewrites `background.svg`, `theme.css`, `theme.json` and `preview/gallery.svg`. The toolkit checks that the SVG is valid XML and that the CSS stays under T3's 20,000-character limit. This theme uses about 19,900, so there's almost no room left: share definitions with `<use>` and group blinking lights under one animation rather than giving each its own.
+This rewrites `background.svg`, `theme.css`, `theme.json` and `preview/gallery.svg`. The toolkit checks that the SVG is valid XML and that the CSS stays under T3's 50,000-character limit. This theme uses about 22,400. To keep it small, share definitions with `<use>` and group blinking lights under one animation rather than giving each its own.

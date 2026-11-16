@@ -16,6 +16,7 @@ import random
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "common"))
+import critters  # noqa: E402
 from themekit import (Actor, blink, build_css, build_svg, dot_pattern, dotted, gallery_svg, parade, pulse,  # noqa: E402
                       specks, wave, write_theme)
 
@@ -159,9 +160,9 @@ creatures, loop, schedule = parade(cast, rounds=3, seed=3)
 snow = specks(16, C2, seed=9, radii=(1, 1.3, 1.6), opacities=(.12, .2, .3), twinkle_every=5, drift=(-14, 18), drift_dur=80)
 svg = build_svg(defs, snow, creatures)
 
-DARK = {"bg": ABYSS, "glow": "rgba(43,196,196,.05)", "veil": "#05080d00", "veil_chat": "#05080d90"}
-DARK.update(accent="#2bc4c4", sidebar="#04060a")
-css = build_css(svg, DARK)
+DARK = {"bg": ABYSS, "glow": "rgba(43,196,196,.05)", "veil": "#05080d00", "veil_chat": "#05080d28"}
+DARK.update(accent="#2bc4c4", sidebar="#04060a", sheen=["#1fa3b8", "#2bc4c4", "#7ef0e0"])
+css = build_css(svg, DARK, critter=critters.JELLY)
 
 gallery = gallery_svg(defs, cast, ABYSS, fit={"siphonophore": (.75, 120, False)})
 write_theme(OUT, "bioluminescence", "Bioluminescence", svg, css, accent="#2bc4c4",

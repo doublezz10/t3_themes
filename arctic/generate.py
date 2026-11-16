@@ -13,6 +13,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "common"))
+import critters  # noqa: E402
 from themekit import (Actor, build_css, build_svg, dot_pattern, gallery_svg, parade, pulse, specks,  # noqa: E402
                       spin, write_theme)
 
@@ -151,11 +152,11 @@ cast = [
 animals, loop, schedule = parade(cast, rounds=3, seed=23)
 svg = build_svg(defs, snow, animals)
 
-DARK = {"bg": "#0c1117", "glow": "rgba(111,168,220,.08)", "veil": "#0c111700", "veil_chat": "#0c111780"}
-LIGHT = {"bg": "#eef4f8", "glow": "rgba(91,155,213,.14)", "veil": "#eef4f826", "veil_chat": "#eef4f8b8"}
-DARK.update(accent="#5b9bd5", sidebar="#090d12")
+DARK = {"bg": "#0c1117", "glow": "rgba(111,168,220,.08)", "veil": "#0c111700", "veil_chat": "#0c111728"}
+LIGHT = {"bg": "#eef4f8", "glow": "rgba(91,155,213,.14)", "veil": "#eef4f826", "veil_chat": "#eef4f860"}
+DARK.update(accent="#5b9bd5", sidebar="#090d12", sheen=["#5b9bd5", "#8cc4ee", "#cfe8ff"])
 LIGHT.update(accent="#5b9bd5", sidebar="#e2eaf1")
-css = build_css(svg, DARK, LIGHT)
+css = build_css(svg, DARK, LIGHT, critter=critters.PENGUIN)
 
 gallery = gallery_svg(defs, cast, DARK["bg"], fit={"orca": (.8, 60, False)})
 write_theme(OUT, "arctic", "Arctic", svg, css, accent="#5b9bd5",

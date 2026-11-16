@@ -55,4 +55,4 @@ python3 generate.py
 python3 ../common/preview.py .      # optional: re-render the previews
 ```
 
-The CSS currently uses about 19,500 of T3's 20,000 characters. Most of it goes to the curtains' animated outlines and the stars, so to add something, trim stars or the ribbon detail (the `step` passed to `ribbon_phase`) first.
+The CSS currently uses about 22,100 of T3's 50,000 characters. Most of it goes to the curtains' animated outlines and the stars.

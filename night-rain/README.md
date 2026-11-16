@@ -27,7 +27,7 @@ Calm rain behind the whole window. Three layers of dotted rain fall at a slight 
 
 ## Inside a conversation
 
-Once a thread has messages, a veil softens the rain so it doesn't compete with the text. The empty new-thread page shows it at full strength.
+Once a thread has messages, each block of chat sits on its own dark reading card, so the rain keeps falling around the text without competing with it.
 
 ![Conversation view](preview/conversation.gif)
 
@@ -56,7 +56,7 @@ python3 night-rain/generate.py
 python3 common/preview.py night-rain      # optional: re-render the previews
 ```
 
-The CSS currently uses about 15,900 of T3's 20,000 characters, so there's room for another passer-by or two.
+The CSS currently uses about 18,400 of T3's 50,000 characters, so there's plenty of room for more passers-by.
 
 ## About the previews
 
