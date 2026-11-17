@@ -163,8 +163,12 @@ svg = build_svg(defs, snow, creatures)
 DARK = {"bg": ABYSS, "glow": "rgba(43,196,196,.05)", "veil": "#05080d00", "veil_chat": "#05080d28"}
 DARK.update(accent="#2bc4c4", sidebar="#04060a", sheen=["#1fa3b8", "#2bc4c4", "#7ef0e0"])
 css = build_css(svg, DARK, critter=critters.JELLY)
+# Calm version: the same scene with nothing crossing it
+calm = build_svg(defs, snow)
+calm_css = build_css(calm, DARK, critter=critters.JELLY)
 
 gallery = gallery_svg(defs, cast, ABYSS, fit={"siphonophore": (.75, 120, False)})
 write_theme(OUT, "bioluminescence", "Bioluminescence", svg, css, accent="#2bc4c4",
             dark_chrome={"canvas": ABYSS, "sidebar": "#04060a", "chrome": "#04060a", "toolbar": "#04060a"},
-            schedule=schedule, loop=loop, gallery=gallery)
+            schedule=schedule, loop=loop, gallery=gallery,
+            calm=(calm, calm_css))

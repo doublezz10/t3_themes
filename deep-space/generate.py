@@ -123,8 +123,12 @@ svg = build_svg(defs, stars, cyan_stars, objects)
 DARK = {"bg": BG, "glow": "rgba(123,108,240,.10)", "veil": "#0b0a1400", "veil_chat": "#0b0a1428"}
 DARK.update(accent="#7b6cf0", sidebar="#08070f", sheen=["#6a5ce0", "#7b6cf0", "#b4a8ff"])
 css = build_css(svg, DARK, critter=critters.ASTRONAUT)
+# Calm version: the same scene with nothing crossing it
+calm = build_svg(defs, stars, cyan_stars)
+calm_css = build_css(calm, DARK, critter=critters.ASTRONAUT)
 
 gallery = gallery_svg(defs, cast, BG, fit={"space whale": (.55, 120, False)})
 write_theme(OUT, "deep-space", "Deep Space", svg, css, accent="#7b6cf0",
             dark_chrome={"canvas": BG, "sidebar": "#08070f", "chrome": "#08070f", "toolbar": "#08070f"},
-            schedule=schedule, loop=loop, gallery=gallery)
+            schedule=schedule, loop=loop, gallery=gallery,
+            calm=(calm, calm_css))

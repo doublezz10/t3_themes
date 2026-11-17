@@ -264,6 +264,10 @@ svg = build_svg(defs, stars, moving, sky, glow, horizon)
 DARK = {"bg": BG, "glow": "rgba(63,224,176,.05)", "veil": "#070b1200", "veil_chat": "#070b1228"}
 DARK.update(accent="#2fc79a", sidebar="#05080d", sheen=[GREEN_LO, GREEN, BLUE, VIOLET])
 css = build_css(svg, DARK, critter=critters.FOX)
+# Calm version: the same scene with nothing crossing it
+calm = build_svg(defs, stars, sky, glow, horizon)
+calm_css = build_css(calm, DARK, critter=critters.FOX)
 write_theme(OUT, "aurora", "Aurora", svg, css, accent="#2fc79a",
             dark_chrome={"canvas": BG, "sidebar": "#05080d", "chrome": "#05080d", "toolbar": "#05080d"},
-            schedule=schedule, loop=loop)
+            schedule=schedule, loop=loop,
+            calm=(calm, calm_css))

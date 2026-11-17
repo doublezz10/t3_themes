@@ -125,9 +125,13 @@ LIGHT = {"bg": "#e6ecf2", "glow": "rgba(79,107,138,.10)", "veil": "#e6ecf21a", "
 DARK.update(accent="#5b8cc4", sidebar="#080b0f", sheen=["#5b8cc4", "#86aad0", "#b9d4ee"])
 LIGHT.update(accent="#5b8cc4", sidebar="#dae2ea")
 css = build_css(svg, DARK, LIGHT, critter=critters.DUCK)
+# Calm version: the same scene with nothing crossing it
+calm = build_svg(defs, haze, rain, ripples, glass, lightning)
+calm_css = build_css(calm, DARK, LIGHT, critter=critters.DUCK)
 
 gallery = gallery_svg(defs, cast, DARK["bg"], cols=4, fit={a.name: (a.scale * 1.4, -40, False) for a in cast})
 write_theme(OUT, "night-rain", "Night Rain", svg, css, accent="#5b8cc4",
             dark_chrome={"canvas": DARK["bg"], "sidebar": "#080b0f", "chrome": "#080b0f", "toolbar": "#080b0f"},
             light_chrome={"canvas": LIGHT["bg"], "sidebar": "#dae2ea", "chrome": "#dae2ea", "toolbar": "#dae2ea"},
-            schedule=schedule, loop=loop, gallery=gallery)
+            schedule=schedule, loop=loop, gallery=gallery,
+            calm=(calm, calm_css))

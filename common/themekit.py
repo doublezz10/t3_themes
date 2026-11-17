@@ -552,13 +552,18 @@ def gallery_svg(defs, actors, bg, cols=4, cell_w=400, cell_h=260, fit=None):
 
 
 def write_theme(out_dir, theme_id, name, svg, css, accent, dark_chrome, light_chrome=None,
-                schedule=None, loop=None, gallery=None, notes=None):
+                schedule=None, loop=None, gallery=None, notes=None, calm=None):
     """Validate and write everything a theme folder needs.
 
     dark_chrome / light_chrome: at least {"canvas": ..., "sidebar": ...}. The rest of
     T3's color roles are derived from these and the accent (see palette()); any role
     given here overrides the derived one.
+    calm: (svg, css) for the same scene with nothing crossing it (no parade). It is
+    written as a sibling theme, ../<theme_id>-calm, named "<name> Calm".
     """
+    if calm:
+        write_theme(os.path.join(out_dir, "..", theme_id + "-calm"), theme_id + "-calm", name + " Calm", calm[0], calm[1],
+                    accent, dark_chrome, light_chrome, schedule=[])
     assert len(css) <= CSS_LIMIT, f"theme css is {len(css)} chars; T3 allows {CSS_LIMIT}"
     os.makedirs(os.path.join(out_dir, "preview"), exist_ok=True)
 

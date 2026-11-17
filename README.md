@@ -22,6 +22,22 @@ Every theme:
 | [**Night Rain**](night-rain/)<br>Layered rain, ripples, drops on the glass and far-off lightning, with an occasional paper boat or umbrella. Dark and light modes. | ![Night Rain](night-rain/preview/home.gif) |
 | [**Aurora**](aurora/)<br>Rippling green-to-violet northern lights over snow-capped mountains and a pine forest, with a rare bright flare. | ![Aurora](aurora/preview/home.gif) |
 
+### Calm versions
+
+Every theme also comes in a calm version, `<theme>-calm`: the same scene, colors and companion, with nothing crossing the screen (no animals, ships, comets or birds). Pick one if the passing creatures pull your eye away from your work.
+
+| Theme | Calm version keeps |
+| --- | --- |
+| [**Arctic Calm**](arctic-calm/) | Falling snow over deep slate |
+| [**Aurora Calm**](aurora-calm/) | The rippling northern lights over snow-capped mountains, a pine forest and twinkling stars |
+| [**Deep Sea Calm**](deep-sea-calm/) | Faint plankton drifting through the dark |
+| [**Bioluminescence Calm**](bioluminescence-calm/) | Glowing marine snow sinking through the dark abyss |
+| [**Deep Space Calm**](deep-space-calm/) | A twinkling starfield |
+| [**Night Rain Calm**](night-rain-calm/) | Layered rain, ripples, drops on the glass and far-off lightning |
+| [**Night Sky Calm**](night-sky-calm/) | A calm starfield where constellations slowly draw themselves |
+
+Install them the same way, with the folder name as the theme id (for example `arctic-calm`).
+
 ## Installing a theme
 
 T3 Code themes are applied through its built-in theme tool, so the easiest way is to ask the agent in a T3 Code thread:

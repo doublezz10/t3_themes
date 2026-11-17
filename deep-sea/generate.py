@@ -135,9 +135,13 @@ LIGHT = {"bg": "#eef4fa", "glow": "rgba(47,95,224,.12)", "veil": "#eef4fa40", "v
 DARK.update(accent="#3b6cf6", sidebar="#0a0b0d", sheen=["#2f5fe0", "#4a7bf0", "#8fb0ff"])
 LIGHT.update(accent="#3b6cf6", sidebar="#e3eaf3")
 css = build_css(svg, DARK, LIGHT, critter=critters.FISH)
+# Calm version: the same scene with nothing crossing it
+calm = build_svg(defs, plankton)
+calm_css = build_css(calm, DARK, LIGHT, critter=critters.FISH)
 
 gallery = gallery_svg(defs, cast, DARK["bg"], fit={"whale": (.55, 120, False)})
 write_theme(OUT, "deep-sea", "Deep Sea", svg, css, accent="#3b6cf6",
             dark_chrome={"canvas": DARK["bg"], "sidebar": "#0a0b0d", "chrome": "#0a0b0d", "toolbar": "#0a0b0d"},
             light_chrome={"canvas": LIGHT["bg"], "sidebar": "#e3eaf3", "chrome": "#e3eaf3", "toolbar": "#e3eaf3"},
-            schedule=schedule, loop=loop, gallery=gallery)
+            schedule=schedule, loop=loop, gallery=gallery,
+            calm=(calm, calm_css))

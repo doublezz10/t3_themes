@@ -220,6 +220,9 @@ svg = build_svg(defs, sky, sky_figures, movers)
 DARK = {"bg": BG, "glow": "rgba(110,130,255,.06)", "veil": "#0a0d1800", "veil_chat": "#0a0d1828"}
 DARK.update(accent="#7aa8ff", sidebar="#080a12", sheen=["#7aa8ff", "#8fe3ff", "#c9b8ff"])
 css = build_css(svg, DARK, critter=critters.OWL)
+# Calm version: the same scene with nothing crossing it
+calm = build_svg(defs, sky, sky_figures)
+calm_css = build_css(calm, DARK, critter=critters.OWL)
 
 
 class Figure:  # minimal stand-in for Actor in the gallery
@@ -239,4 +242,5 @@ schedule = [{"name": n, "start": round(s, 2), "end": round(e, 2)} for n, s, e, _
 notes = {"shooting_stars": meteor_times, "satellite": sat_times, "comet": comet_time}
 write_theme(OUT, "night-sky", "Night Sky", svg, css, accent="#7aa8ff",
             dark_chrome={"canvas": BG, "sidebar": "#080a12", "chrome": "#080a12", "toolbar": "#080a12"},
-            schedule=schedule, loop=LOOP, gallery=gallery, notes=notes)
+            schedule=schedule, loop=LOOP, gallery=gallery, notes=notes,
+            calm=(calm, calm_css))

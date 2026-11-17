@@ -157,9 +157,13 @@ LIGHT = {"bg": "#eef4f8", "glow": "rgba(91,155,213,.14)", "veil": "#eef4f826", "
 DARK.update(accent="#5b9bd5", sidebar="#090d12", sheen=["#5b9bd5", "#8cc4ee", "#cfe8ff"])
 LIGHT.update(accent="#5b9bd5", sidebar="#e2eaf1")
 css = build_css(svg, DARK, LIGHT, critter=critters.PENGUIN)
+# Calm version: the same scene with nothing crossing it
+calm = build_svg(defs, snow)
+calm_css = build_css(calm, DARK, LIGHT, critter=critters.PENGUIN)
 
 gallery = gallery_svg(defs, cast, DARK["bg"], fit={"orca": (.8, 60, False)})
 write_theme(OUT, "arctic", "Arctic", svg, css, accent="#5b9bd5",
             dark_chrome={"canvas": DARK["bg"], "sidebar": "#090d12", "chrome": "#090d12", "toolbar": "#090d12"},
             light_chrome={"canvas": LIGHT["bg"], "sidebar": "#e2eaf1", "chrome": "#e2eaf1", "toolbar": "#e2eaf1"},
-            schedule=schedule, loop=loop, gallery=gallery)
+            schedule=schedule, loop=loop, gallery=gallery,
+            calm=(calm, calm_css))

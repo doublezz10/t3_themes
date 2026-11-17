@@ -117,7 +117,7 @@ class Renderer:
             prof = self.profiles.get()
             try:
                 subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", f"--user-data-dir={prof}",
-                                f"--window-size={size[0]},{size[1]}", f"--virtual-time-budget={int(t * 1000)}",
+                                f"--window-size={size[0]},{size[1]}", f"--virtual-time-budget={max(1, int(t * 1000))}",
                                 f"--screenshot={out_png}", "file://" + html_path],
                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
             except subprocess.TimeoutExpired:
