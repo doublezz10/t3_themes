@@ -3,11 +3,12 @@ edge, sleeps while the composer isn't focused, wakes when you click in, and
 moves along above the end of your text as you type.
 
 The trick (from the Koi Pond and Biscuit skins on t3skins.dev): the critter is
-the ::after of the composer's last paragraph, absolutely positioned with
-left:auto. An absolute box with no left keeps its "static" horizontal
-position, which is just after the last character typed. The editor itself is
-a scroller, so it's made position:static and its parent becomes the
-containing block; otherwise the scroller would clip the critter.
+the ::after of the composer's last paragraph, positioned with left:auto. A
+positioned box with no left keeps its "static" horizontal position, which is
+just after the last character typed. It's position:fixed, and the composer
+card has contain:layout, so the card (not the window) is its containing block:
+top is measured from the card's top edge whatever sits above the text
+(attached images, banners), and the scrolling editor can't clip it.
 
 Each critter is drawn as rows of characters, one dot per character, in the
 same dotted style as the scenes. Blinks, a glow or a bob are CSS animations
@@ -96,9 +97,10 @@ class Critter:
         w, h = self.size()
         h += 10
         glow = f"filter:drop-shadow(0 0 5px {_alpha(self.glow, .45)});" if self.glow else ""
-        return (f"{P}[data-slot=composer-host] :has(>.composer-tiptap){{position:relative!important}}"
-                f"{P}[data-slot=composer-host] .composer-tiptap{{position:static!important}}"
-                f'{P}.composer-tiptap>p:last-child::after{{content:"";position:absolute;top:{-(h + 11 + self.lift)}px;'
+        # contain:layout makes the composer card the containing block for the fixed critter
+        # (the theme's backdrop-filter already does, this keeps it true without one)
+        return (f"{P}[data-slot=composer-host]{{contain:layout}}"
+                f'{P}.composer-tiptap>p:last-child::after{{content:"";position:fixed;top:{-(h - 1 + self.lift)}px;'
                 f'margin-left:-3px;width:{w}px;height:{h}px;pointer-events:none;z-index:40;{glow}'
                 f'background:url("{self._url(self.svg(True))}") 0 0/100% 100% no-repeat}}'
                 f'{P}.composer-tiptap:focus>p:last-child::after{{background-image:url("{self._url(self.svg(False))}")}}')

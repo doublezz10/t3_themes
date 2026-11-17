@@ -73,7 +73,7 @@ python3 common/preview.py deep-sea      # needs Google Chrome and ffmpeg
 
 ![Companions, asleep and awake](common/critters.png)
 
-The companion is the `::after` of the composer's last paragraph, positioned absolutely but without a `left`, so it keeps the horizontal spot where the text ends (the trick the Koi Pond and Biscuit skins on [t3skins.dev](https://www.t3skins.dev) use). It sleeps while the composer isn't focused. Blinks, bubbles and other small motions are CSS animations inside its SVG, and stop when "Reduce motion" is on. The cast lives in `common/critters.py`.
+The companion is the `::after` of the composer's last paragraph, positioned without a `left`, so it keeps the horizontal spot where the text ends (the trick the Koi Pond and Biscuit skins on [t3skins.dev](https://www.t3skins.dev) use). It is `position:fixed` inside a composer card with `contain:layout`, so its height is measured from the card's top edge: attached images or banners above the text don't push it down into the card. It sleeps while the composer isn't focused. Blinks, bubbles and other small motions are CSS animations inside its SVG, and stop when "Reduce motion" is on. The cast lives in `common/critters.py`.
 
 ## How the animation stays unpredictable
 
